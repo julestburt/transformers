@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		847C43502325A31C00E6BC32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C434F2325A31C00E6BC32 /* AppDelegate.swift */; };
-		847C43522325A31C00E6BC32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C43512325A31C00E6BC32 /* ViewController.swift */; };
+		847C43522325A31C00E6BC32 /* CreateTransformerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */; };
 		847C43552325A31C00E6BC32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847C43532325A31C00E6BC32 /* Main.storyboard */; };
 		847C43572325A31D00E6BC32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 847C43562325A31D00E6BC32 /* Assets.xcassets */; };
 		847C435A2325A31D00E6BC32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847C43582325A31D00E6BC32 /* LaunchScreen.storyboard */; };
-		847C43652325A31E00E6BC32 /* transformersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C43642325A31E00E6BC32 /* transformersTests.swift */; };
+		847C43652325A31E00E6BC32 /* CreateTransformerVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */; };
+		847C43732325AA2300E6BC32 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C43722325AA2300E6BC32 /* APIService.swift */; };
+		84B81D3F2325AE5D00260CCD /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 84B81D3E2325AE5D00260CCD /* Cartfile */; };
+		84B81D432325B0D500260CCD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B81D412325B0D500260CCD /* Alamofire.framework */; };
+		84B81D442325B0D500260CCD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B81D422325B0D500260CCD /* SwiftyJSON.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,14 +32,18 @@
 /* Begin PBXFileReference section */
 		847C434C2325A31C00E6BC32 /* transformers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transformers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		847C434F2325A31C00E6BC32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		847C43512325A31C00E6BC32 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransformerVC.swift; sourceTree = "<group>"; };
 		847C43542325A31C00E6BC32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		847C43562325A31D00E6BC32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		847C43592325A31D00E6BC32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		847C435B2325A31D00E6BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		847C43602325A31E00E6BC32 /* transformersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = transformersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		847C43642325A31E00E6BC32 /* transformersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transformersTests.swift; sourceTree = "<group>"; };
+		847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransformerVCTests.swift; sourceTree = "<group>"; };
 		847C43662325A31E00E6BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		847C43722325AA2300E6BC32 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		84B81D3E2325AE5D00260CCD /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Cartfile; sourceTree = "<group>"; };
+		84B81D412325B0D500260CCD /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		84B81D422325B0D500260CCD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B81D432325B0D500260CCD /* Alamofire.framework in Frameworks */,
+				84B81D442325B0D500260CCD /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,9 +69,11 @@
 		847C43432325A31C00E6BC32 = {
 			isa = PBXGroup;
 			children = (
+				84B81D3E2325AE5D00260CCD /* Cartfile */,
 				847C434E2325A31C00E6BC32 /* transformers */,
 				847C43632325A31E00E6BC32 /* transformersTests */,
 				847C434D2325A31C00E6BC32 /* Products */,
+				84B81D402325B0D500260CCD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,12 +89,11 @@
 		847C434E2325A31C00E6BC32 /* transformers */ = {
 			isa = PBXGroup;
 			children = (
-				847C434F2325A31C00E6BC32 /* AppDelegate.swift */,
-				847C43512325A31C00E6BC32 /* ViewController.swift */,
-				847C43532325A31C00E6BC32 /* Main.storyboard */,
+				847C43702325A9EC00E6BC32 /* Views */,
+				847C43712325A9F600E6BC32 /* Storyboards */,
+				847C43742325AA2800E6BC32 /* Workers */,
+				847C436F2325A9D800E6BC32 /* App */,
 				847C43562325A31D00E6BC32 /* Assets.xcassets */,
-				847C43582325A31D00E6BC32 /* LaunchScreen.storyboard */,
-				847C435B2325A31D00E6BC32 /* Info.plist */,
 			);
 			path = transformers;
 			sourceTree = "<group>";
@@ -90,10 +101,53 @@
 		847C43632325A31E00E6BC32 /* transformersTests */ = {
 			isa = PBXGroup;
 			children = (
-				847C43642325A31E00E6BC32 /* transformersTests.swift */,
+				847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */,
 				847C43662325A31E00E6BC32 /* Info.plist */,
 			);
 			path = transformersTests;
+			sourceTree = "<group>";
+		};
+		847C436F2325A9D800E6BC32 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				847C434F2325A31C00E6BC32 /* AppDelegate.swift */,
+				847C43582325A31D00E6BC32 /* LaunchScreen.storyboard */,
+				847C435B2325A31D00E6BC32 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		847C43702325A9EC00E6BC32 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		847C43712325A9F600E6BC32 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				847C43532325A31C00E6BC32 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		847C43742325AA2800E6BC32 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				847C43722325AA2300E6BC32 /* APIService.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		84B81D402325B0D500260CCD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84B81D412325B0D500260CCD /* Alamofire.framework */,
+				84B81D422325B0D500260CCD /* SwiftyJSON.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,6 +160,7 @@
 				847C43482325A31C00E6BC32 /* Sources */,
 				847C43492325A31C00E6BC32 /* Frameworks */,
 				847C434A2325A31C00E6BC32 /* Resources */,
+				84B81D452325B27C00260CCD /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -180,6 +235,7 @@
 				847C435A2325A31D00E6BC32 /* LaunchScreen.storyboard in Resources */,
 				847C43572325A31D00E6BC32 /* Assets.xcassets in Resources */,
 				847C43552325A31C00E6BC32 /* Main.storyboard in Resources */,
+				84B81D3F2325AE5D00260CCD /* Cartfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,12 +248,38 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		84B81D452325B27C00260CCD /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		847C43482325A31C00E6BC32 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				847C43522325A31C00E6BC32 /* ViewController.swift in Sources */,
+				847C43522325A31C00E6BC32 /* CreateTransformerVC.swift in Sources */,
+				847C43732325AA2300E6BC32 /* APIService.swift in Sources */,
 				847C43502325A31C00E6BC32 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				847C43652325A31E00E6BC32 /* transformersTests.swift in Sources */,
+				847C43652325A31E00E6BC32 /* CreateTransformerVCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +444,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = transformers/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/transformers/App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -381,7 +467,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = transformers/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/transformers/App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

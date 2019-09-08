@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CreateTransformer.swift
 //  transformers
 //
 //  Created by Jules Burt on 2019-09-08.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CreateTransformerVC : UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

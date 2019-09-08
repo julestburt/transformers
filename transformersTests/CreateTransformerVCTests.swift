@@ -10,13 +10,27 @@ import XCTest
 @testable import transformers
 
 class transformersTests: XCTestCase {
+    
+    var sut:CreateTransformerVC!
+    var window :UIWindow!
 
     override func setUp() {
+        super.setUp()
+        window = UIWindow()
+        setupCreateTransoformerVC()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDown() {
+        window = nil
+        super.tearDown()
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+    
+    func setupCreateTransoformerVC() {
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Main", bundle: bundle)
+        sut = storyboard.instantiateViewController(withIdentifier: "CreateTransformer") as? CretaeTransformerVC
     }
 
     func testExample() {
