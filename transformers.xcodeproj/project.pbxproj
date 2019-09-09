@@ -28,6 +28,7 @@
 		84E3DE292326A9ED005E621A /* FakeCover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E3DE282326A9ED005E621A /* FakeCover.xib */; };
 		84E3DE2B2326AAA2005E621A /* FakeCoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */; };
 		84E3DE2D2326B2ED005E621A /* BattleTransformersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */; };
+		84E3DE342326D86C005E621A /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E3DE312326D83A005E621A /* SnapshotTesting.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		84E3DE282326A9ED005E621A /* FakeCover.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FakeCover.xib; sourceTree = "<group>"; };
 		84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCoverVC.swift; sourceTree = "<group>"; };
 		84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleTransformersVC.swift; sourceTree = "<group>"; };
+		84E3DE312326D83A005E621A /* SnapshotTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapshotTesting.framework; path = Carthage/Build/iOS/SnapshotTesting.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B81D432325B0D500260CCD /* Alamofire.framework in Frameworks */,
+				84E3DE342326D86C005E621A /* SnapshotTesting.framework in Frameworks */,
 				84B81D442325B0D500260CCD /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,8 +124,8 @@
 		847C43632325A31E00E6BC32 /* transformersTests */ = {
 			isa = PBXGroup;
 			children = (
-				847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */,
 				847C43662325A31E00E6BC32 /* Info.plist */,
+				84E3DE352326DE5E005E621A /* Views */,
 			);
 			path = transformersTests;
 			sourceTree = "<group>";
@@ -140,14 +143,11 @@
 		847C43702325A9EC00E6BC32 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */,
-				84B81D462325C76200260CCD /* CreateTransformerModel.swift */,
-				84E3DE202325E7CF005E621A /* ViewUtils.swift */,
-				84E3DE2423262E8D005E621A /* FakeSplashVC.swift */,
-				84E3DE262326A267005E621A /* ShowTransformersVC.swift */,
-				84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */,
+				84E3DE2E2326BDB7005E621A /* FakeSplash */,
+				84E3DE2F2326BDC8005E621A /* CreateTransformer */,
+				84E3DE302326BDD7005E621A /* ShowTransformers */,
 				84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */,
-				84E3DE282326A9ED005E621A /* FakeCover.xib */,
+				84E3DE202325E7CF005E621A /* ViewUtils.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -173,10 +173,46 @@
 		84B81D402325B0D500260CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84E3DE312326D83A005E621A /* SnapshotTesting.framework */,
 				84B81D412325B0D500260CCD /* Alamofire.framework */,
 				84B81D422325B0D500260CCD /* SwiftyJSON.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		84E3DE2E2326BDB7005E621A /* FakeSplash */ = {
+			isa = PBXGroup;
+			children = (
+				84E3DE2423262E8D005E621A /* FakeSplashVC.swift */,
+				84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */,
+				84E3DE282326A9ED005E621A /* FakeCover.xib */,
+			);
+			path = FakeSplash;
+			sourceTree = "<group>";
+		};
+		84E3DE2F2326BDC8005E621A /* CreateTransformer */ = {
+			isa = PBXGroup;
+			children = (
+				847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */,
+				84B81D462325C76200260CCD /* CreateTransformerModel.swift */,
+			);
+			path = CreateTransformer;
+			sourceTree = "<group>";
+		};
+		84E3DE302326BDD7005E621A /* ShowTransformers */ = {
+			isa = PBXGroup;
+			children = (
+				84E3DE262326A267005E621A /* ShowTransformersVC.swift */,
+			);
+			path = ShowTransformers;
+			sourceTree = "<group>";
+		};
+		84E3DE352326DE5E005E621A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +326,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapshotTesting.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -297,6 +334,7 @@
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapshotTesting.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -531,6 +569,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZU9YSQ22FQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = transformersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -552,6 +594,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZU9YSQ22FQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = transformersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

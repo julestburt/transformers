@@ -147,29 +147,3 @@ class APIRequest: NSObject {
     }
 }
 
-/*
- 
- enum Team : String {
- case autobots = "A"
- case decepticon = "B"
- }
- 
- struct Transformer {
- let id:String
- let name:String
- let strength:Int
- let intelligence:Int
- let speed:Int
- let endurance:Int
- let rank:Int
- let courage:Int
- let firepower:Int
- let skill:Int
- let team:Team
- var overall_rating:Int {
- return self.strength + self.intelligence + self.speed + self.endurance + self.firepower
- }
- }
-
- */
-

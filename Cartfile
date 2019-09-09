@@ -1,2 +1,4 @@
 github "Alamofire/Alamofire" ~> 4.0
 github "SwiftyJSON/SwiftyJSON"
+github "pointfreeco/swift-snapshot-testing" ~> 1.5
+
