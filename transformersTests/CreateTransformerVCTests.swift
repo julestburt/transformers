@@ -17,7 +17,7 @@ class transformersTests: XCTestCase {
     override func setUp() {
         super.setUp()
         window = UIWindow()
-        setupCreateTransoformerVC()
+        setupCreateTransformerVC()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
@@ -27,22 +27,28 @@ class transformersTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func setupCreateTransoformerVC() {
+    func setupCreateTransformerVC() {
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "Main", bundle: bundle)
-        sut = storyboard.instantiateViewController(withIdentifier: "CreateTransformer") as? CretaeTransformerVC
+        sut = storyboard.instantiateViewController(withIdentifier: "CreateTransformerVC") as? CreateTransformerVC
+    }
+    
+    func loadView() {
+        window.addSubview(sut.view)
+        RunLoop.current.run(until: Date())
     }
 
-    func testExample() {
+    func testViewStart() {
+        
+        loadView()
+        if let first = sut.transformerProperties.first {
+            XCTAssert(first.rawValue == TransformerProperty.init(rawValue:TransformerProperties[0])!.rawValue, "Failed to find the first transformer value")
+        }
+        for (idx, eachProperty) in sut.transformerProperties.enumerated() {
+                XCTAssert(eachProperty.rawValue == TransformerProperties[idx], "Failed to find all expected values")
+        }
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
 
 }

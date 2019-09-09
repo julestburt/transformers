@@ -1,24 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Create TransformerVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateTransformerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="CreateTransformerVC" customModule="transformers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMh-f7-Vdu">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Transformer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EM-SM-Dme" userLabel="Create Transformer">
+                                        <rect key="frame" x="50" y="50" width="314" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="hJW-cZ-M2q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="transformer name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qKx-vz-LLF">
+                                        <rect key="frame" x="50" y="198" width="314" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="IHR-8c-xTN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rz1-DO-XOi">
+                                        <rect key="frame" x="30" y="273" width="354" height="395"/>
+                                    </stackView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2tj-zs-nTk">
+                                        <rect key="frame" x="58" y="103" width="298" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="bTW-Xb-crh"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Autobot"/>
+                                            <segment title="Decepticon"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="2tj-zs-nTk" secondAttribute="trailing" constant="50" id="1iL-fr-cF5"/>
+                                    <constraint firstAttribute="bottom" secondItem="rz1-DO-XOi" secondAttribute="bottom" constant="150" id="1yy-gi-LzR"/>
+                                    <constraint firstItem="rz1-DO-XOi" firstAttribute="top" secondItem="qKx-vz-LLF" secondAttribute="bottom" constant="30" id="7Pc-UH-6pd"/>
+                                    <constraint firstItem="2EM-SM-Dme" firstAttribute="leading" secondItem="KMh-f7-Vdu" secondAttribute="leading" constant="50" id="Hte-wf-0Ct"/>
+                                    <constraint firstItem="2tj-zs-nTk" firstAttribute="top" secondItem="2EM-SM-Dme" secondAttribute="bottom" constant="8" id="Jp8-YL-eZF"/>
+                                    <constraint firstItem="qKx-vz-LLF" firstAttribute="leading" secondItem="KMh-f7-Vdu" secondAttribute="leading" constant="50" id="Ldj-8t-nlP"/>
+                                    <constraint firstItem="2EM-SM-Dme" firstAttribute="top" secondItem="KMh-f7-Vdu" secondAttribute="top" constant="50" id="Lyz-IL-kRY"/>
+                                    <constraint firstItem="2tj-zs-nTk" firstAttribute="leading" secondItem="KMh-f7-Vdu" secondAttribute="leadingMargin" constant="50" id="NXd-8U-n8S"/>
+                                    <constraint firstAttribute="trailing" secondItem="qKx-vz-LLF" secondAttribute="trailing" constant="50" id="YzS-gk-W2Q"/>
+                                    <constraint firstItem="rz1-DO-XOi" firstAttribute="leading" secondItem="KMh-f7-Vdu" secondAttribute="leading" constant="30" id="ZT8-yz-jR5"/>
+                                    <constraint firstAttribute="trailing" secondItem="2EM-SM-Dme" secondAttribute="trailing" constant="50" id="bya-17-jM3"/>
+                                    <constraint firstItem="qKx-vz-LLF" firstAttribute="top" secondItem="2tj-zs-nTk" secondAttribute="bottom" constant="50" id="hgr-h5-wHk"/>
+                                    <constraint firstAttribute="trailing" secondItem="rz1-DO-XOi" secondAttribute="trailing" constant="30" id="sB9-OF-yqa"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="KMh-f7-Vdu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="4H5-YY-q9y"/>
+                            <constraint firstItem="KMh-f7-Vdu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="IVG-YR-KaA"/>
+                            <constraint firstItem="KMh-f7-Vdu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aA3-5i-zUv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KMh-f7-Vdu" secondAttribute="bottom" id="d6c-Za-VOi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="name" destination="qKx-vz-LLF" id="cxp-qV-eDC"/>
+                        <outlet property="settingsView" destination="rz1-DO-XOi" id="7zJ-Rf-HvA"/>
+                        <outlet property="typeSelection" destination="2tj-zs-nTk" id="sRT-gM-UvL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="130.58035714285714"/>
         </scene>
     </scenes>
 </document>

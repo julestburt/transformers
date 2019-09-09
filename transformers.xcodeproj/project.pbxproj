@@ -17,6 +17,9 @@
 		84B81D3F2325AE5D00260CCD /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 84B81D3E2325AE5D00260CCD /* Cartfile */; };
 		84B81D432325B0D500260CCD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B81D412325B0D500260CCD /* Alamofire.framework */; };
 		84B81D442325B0D500260CCD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B81D422325B0D500260CCD /* SwiftyJSON.framework */; };
+		84B81D472325C76200260CCD /* CreateTransformerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81D462325C76200260CCD /* CreateTransformerModel.swift */; };
+		84B81D482325C78E00260CCD /* CreateTransformerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81D462325C76200260CCD /* CreateTransformerModel.swift */; };
+		84B81D4B2325CCAC00260CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847C43532325A31C00E6BC32 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,7 @@
 		84B81D3E2325AE5D00260CCD /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Cartfile; sourceTree = "<group>"; };
 		84B81D412325B0D500260CCD /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		84B81D422325B0D500260CCD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		84B81D462325C76200260CCD /* CreateTransformerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransformerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */,
+				84B81D462325C76200260CCD /* CreateTransformerModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B81D4B2325CCAC00260CCD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +287,7 @@
 				847C43522325A31C00E6BC32 /* CreateTransformerVC.swift in Sources */,
 				847C43732325AA2300E6BC32 /* APIService.swift in Sources */,
 				847C43502325A31C00E6BC32 /* AppDelegate.swift in Sources */,
+				84B81D472325C76200260CCD /* CreateTransformerModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				847C43652325A31E00E6BC32 /* CreateTransformerVCTests.swift in Sources */,
+				84B81D482325C78E00260CCD /* CreateTransformerModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
