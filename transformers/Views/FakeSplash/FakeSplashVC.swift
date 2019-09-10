@@ -11,70 +11,75 @@ import UIKit
 class FakeSplashVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
-        if true {   //Current.token != nil {
-            self.showTransformers()
-        } else {
-            self.showLogin()
-        }
+        let startView = Current.user != nil ?
+            showTransformers()
+            :
+            showLogin()
+        self.show(startView)
     }
 
-    func showLogin() {
-        
-    }
-    
-    func showTransformers() {
+    func showLogin() -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let showTransformers = storyboard.instantiateViewController(withIdentifier: "ShowTransformers") as? ShowTransformersVC
-            else { return }
-            show(showTransformers)
+        return storyboard.instantiateViewController(withIdentifier: "Login")
     }
     
-    func show(_ nextViewController:UIViewController) {
-        
-        // Slight delay to avoid a black flash, particularly on older iOS9 devices
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-            if let window = UIApplication.shared.delegate?.window, let w = window {
-                
-                let captureShot = self.capture(self.view.frame.size)
-                let coverUpFakeShot = UIImageView()
-                coverUpFakeShot.image = captureShot
-                coverUpFakeShot.frame = w.bounds
-                
-                let fakeViewShot = UIImageView()
-                fakeViewShot.image = captureShot
-                fakeViewShot.frame = w.bounds
-                
-                let fakeCover = FakeCoverVC.init(nibName: "FakeCover", bundle: nil)
-                fakeCover.view.addSubview(fakeViewShot)
-                
-                nextViewController.setRootVC()
-                w.addSubview(coverUpFakeShot)
-                
-                nextViewController.present(fakeCover, animated: false) {
-                    coverUpFakeShot.removeFromSuperview()
-                    // dismiss realFakeView to reveal nextViewController
-                }
-            }
-        }
+    func showTransformers() -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: "ShowTransformers")
     }
     
+//    func show(_ nextViewController:UIViewController) {
+//
+//        // Slight delay to avoid a black flash, particularly on older iOS9 devices
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+//            if let window = UIApplication.shared.delegate?.window, let w = window {
+//
+//                let captureShot = self.capture(self.view.frame.size)
+//                let coverUpFakeShot = UIImageView()
+//                coverUpFakeShot.image = captureShot
+//                coverUpFakeShot.frame = w.bounds
+//
+//                let fakeViewShot = UIImageView()
+//                fakeViewShot.image = captureShot
+//                fakeViewShot.frame = w.bounds
+//
+//                let fakeCover = FakeCoverVC.init(nibName: "FakeCover", bundle: nil)
+//                fakeCover.view.addSubview(fakeViewShot)
+//
+//                nextViewController.setRootVC()
+//                w.addSubview(coverUpFakeShot)
+//
+//                nextViewController.present(fakeCover, animated: false) {
+//                    coverUpFakeShot.removeFromSuperview()
+//                    // dismiss realFakeView to reveal nextViewController
+//                }
+//            }
+//        }
+//    }
     
-    func capture(_ size:CGSize) -> UIImage? {
-        UIGraphicsBeginImageContext(size)
-        defer { UIGraphicsEndImageContext() }
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        view.layer.render(in: context)
-        return UIGraphicsGetImageFromCurrentImageContext()
-    }
+    
+//    func capture(_ size:CGSize) -> UIImage? {
+//        UIGraphicsBeginImageContext(size)
+//        defer { UIGraphicsEndImageContext() }
+//        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+//        view.layer.render(in: context)
+//        return UIGraphicsGetImageFromCurrentImageContext()
+//    }
 
 }
 
-extension UIViewController {
-    func setRootVC() {
-        if let window = UIApplication.shared.delegate?.window, let w = window {
-            w.rootViewController = self
-            w.makeKeyAndVisible()
-        }
+class LoginNavigationController :UINavigationController {
+//    var viewToPresent:(()->UIViewController)? = nil
+    
+    override func viewDidLoad() {
+        //
     }
-
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        if let view = viewToPresent?() {
+//            present(view, animated: false) {
+//                print("added view modally to stack")
+//            }
+//        }
+//    }
 }

@@ -14,6 +14,9 @@
 		847C435A2325A31D00E6BC32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847C43582325A31D00E6BC32 /* LaunchScreen.storyboard */; };
 		847C43652325A31E00E6BC32 /* CreateTransformerVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */; };
 		847C43732325AA2300E6BC32 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C43722325AA2300E6BC32 /* APIService.swift */; };
+		84882F972326E782008D15E2 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84882F962326E782008D15E2 /* Transformer.swift */; };
+		84882F9A2326FBF2008D15E2 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84882F992326FBF2008D15E2 /* Environment.swift */; };
+		84882F9C232700EB008D15E2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84882F9B232700EB008D15E2 /* LoginVC.swift */; };
 		84B81D3F2325AE5D00260CCD /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 84B81D3E2325AE5D00260CCD /* Cartfile */; };
 		84B81D432325B0D500260CCD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B81D412325B0D500260CCD /* Alamofire.framework */; };
 		84B81D442325B0D500260CCD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B81D422325B0D500260CCD /* SwiftyJSON.framework */; };
@@ -53,6 +56,9 @@
 		847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransformerVCTests.swift; sourceTree = "<group>"; };
 		847C43662325A31E00E6BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		847C43722325AA2300E6BC32 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		84882F962326E782008D15E2 /* Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
+		84882F992326FBF2008D15E2 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		84882F9B232700EB008D15E2 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		84B81D3E2325AE5D00260CCD /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Cartfile; sourceTree = "<group>"; };
 		84B81D412325B0D500260CCD /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		84B81D422325B0D500260CCD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -112,8 +118,10 @@
 		847C434E2325A31C00E6BC32 /* transformers */ = {
 			isa = PBXGroup;
 			children = (
+				84882F992326FBF2008D15E2 /* Environment.swift */,
 				847C43702325A9EC00E6BC32 /* Views */,
 				847C43712325A9F600E6BC32 /* Storyboards */,
+				84882F982326E786008D15E2 /* Models */,
 				847C43742325AA2800E6BC32 /* Workers */,
 				847C436F2325A9D800E6BC32 /* App */,
 				847C43562325A31D00E6BC32 /* Assets.xcassets */,
@@ -144,8 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				84E3DE2E2326BDB7005E621A /* FakeSplash */,
-				84E3DE2F2326BDC8005E621A /* CreateTransformer */,
 				84E3DE302326BDD7005E621A /* ShowTransformers */,
+				84E3DE2F2326BDC8005E621A /* CreateTransformer */,
 				84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */,
 				84E3DE202325E7CF005E621A /* ViewUtils.swift */,
 			);
@@ -170,6 +178,14 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
+		84882F982326E786008D15E2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84882F962326E782008D15E2 /* Transformer.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		84B81D402325B0D500260CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +202,7 @@
 				84E3DE2423262E8D005E621A /* FakeSplashVC.swift */,
 				84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */,
 				84E3DE282326A9ED005E621A /* FakeCover.xib */,
+				84882F9B232700EB008D15E2 /* LoginVC.swift */,
 			);
 			path = FakeSplash;
 			sourceTree = "<group>";
@@ -349,11 +366,14 @@
 			files = (
 				84E3DE1F2325E76F005E621A /* Utils.swift in Sources */,
 				84E3DE232325EA32005E621A /* Functional.swift in Sources */,
+				84882F9C232700EB008D15E2 /* LoginVC.swift in Sources */,
 				847C43522325A31C00E6BC32 /* CreateTransformerVC.swift in Sources */,
 				84E3DE2523262E8D005E621A /* FakeSplashVC.swift in Sources */,
 				84E3DE212325E7CF005E621A /* ViewUtils.swift in Sources */,
 				847C43732325AA2300E6BC32 /* APIService.swift in Sources */,
 				84E3DE272326A267005E621A /* ShowTransformersVC.swift in Sources */,
+				84882F972326E782008D15E2 /* Transformer.swift in Sources */,
+				84882F9A2326FBF2008D15E2 /* Environment.swift in Sources */,
 				847C43502325A31C00E6BC32 /* AppDelegate.swift in Sources */,
 				84B81D472325C76200260CCD /* CreateTransformerModel.swift in Sources */,
 				84E3DE2D2326B2ED005E621A /* BattleTransformersVC.swift in Sources */,
