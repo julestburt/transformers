@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8473730D232773FC00B6E697 /* FireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473730C232773FC00B6E697 /* FireBase.swift */; };
 		847C43502325A31C00E6BC32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C434F2325A31C00E6BC32 /* AppDelegate.swift */; };
 		847C43522325A31C00E6BC32 /* CreateTransformerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */; };
 		847C43552325A31C00E6BC32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847C43532325A31C00E6BC32 /* Main.storyboard */; };
@@ -31,7 +32,6 @@
 		84E3DE292326A9ED005E621A /* FakeCover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E3DE282326A9ED005E621A /* FakeCover.xib */; };
 		84E3DE2B2326AAA2005E621A /* FakeCoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */; };
 		84E3DE2D2326B2ED005E621A /* BattleTransformersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */; };
-		84E3DE342326D86C005E621A /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E3DE312326D83A005E621A /* SnapshotTesting.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8473730C232773FC00B6E697 /* FireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBase.swift; sourceTree = "<group>"; };
 		847C434C2325A31C00E6BC32 /* transformers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transformers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		847C434F2325A31C00E6BC32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransformerVC.swift; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B81D432325B0D500260CCD /* Alamofire.framework in Frameworks */,
-				84E3DE342326D86C005E621A /* SnapshotTesting.framework in Frameworks */,
 				84B81D442325B0D500260CCD /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +151,7 @@
 		847C43702325A9EC00E6BC32 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84E6B91D23276E99006165FD /* Login */,
 				84E3DE2E2326BDB7005E621A /* FakeSplash */,
 				84E3DE302326BDD7005E621A /* ShowTransformers */,
 				84E3DE2F2326BDC8005E621A /* CreateTransformer */,
@@ -171,6 +172,7 @@
 		847C43742325AA2800E6BC32 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
+				8473730C232773FC00B6E697 /* FireBase.swift */,
 				847C43722325AA2300E6BC32 /* APIService.swift */,
 				84E3DE1E2325E76F005E621A /* Utils.swift */,
 				84E3DE222325EA32005E621A /* Functional.swift */,
@@ -202,7 +204,6 @@
 				84E3DE2423262E8D005E621A /* FakeSplashVC.swift */,
 				84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */,
 				84E3DE282326A9ED005E621A /* FakeCover.xib */,
-				84882F9B232700EB008D15E2 /* LoginVC.swift */,
 			);
 			path = FakeSplash;
 			sourceTree = "<group>";
@@ -230,6 +231,14 @@
 				847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		84E6B91D23276E99006165FD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				84882F9B232700EB008D15E2 /* LoginVC.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,7 +352,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapshotTesting.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -351,7 +359,6 @@
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapshotTesting.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -368,6 +375,7 @@
 				84E3DE232325EA32005E621A /* Functional.swift in Sources */,
 				84882F9C232700EB008D15E2 /* LoginVC.swift in Sources */,
 				847C43522325A31C00E6BC32 /* CreateTransformerVC.swift in Sources */,
+				8473730D232773FC00B6E697 /* FireBase.swift in Sources */,
 				84E3DE2523262E8D005E621A /* FakeSplashVC.swift in Sources */,
 				84E3DE212325E7CF005E621A /* ViewUtils.swift in Sources */,
 				847C43732325AA2300E6BC32 /* APIService.swift in Sources */,
@@ -478,6 +486,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -532,6 +541,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -554,7 +564,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bethegame..transformers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -577,7 +587,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bethegame..transformers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -601,7 +611,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bethegame..transformersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/transformers.app/transformers";
 			};
@@ -626,7 +636,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bethegame..transformersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/transformers.app/transformers";
 			};

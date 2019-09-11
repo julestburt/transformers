@@ -49,11 +49,11 @@ class ShowTransformersVC : UIViewController, ShowTransformersDisplay {
 
 extension ShowTransformersVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        transformers?.count ?? 1
+        return transformers?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        transformers?.count != nil ? 50 : 80
+        return transformers?.count != nil ? 50 : 80
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

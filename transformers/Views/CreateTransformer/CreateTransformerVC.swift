@@ -45,7 +45,7 @@ class CreateTransformerVC : UIViewController {
 
 extension CreateTransformerVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        transformerProperties.count
+        return transformerProperties.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

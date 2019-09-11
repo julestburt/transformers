@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import SnapshotTesting
+//import SnapshotTesting
 
 @testable import transformers
 
@@ -55,7 +55,7 @@ class CreateTransformerTests: XCTestCase {
     
     func testLayout() {
         loadView()
-        assertSnapshot(matching: sut, as: .image(on: .iPhone8))
+//        assertSnapshot(matching: sut, as: .image(on: .iPhone8))
     }
 
 }

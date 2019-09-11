@@ -17,8 +17,15 @@ struct Environment {
 }
 
 struct User {
-    static var token:String? {
-        return UserDefaults.standard.string(forKey: UserDefaults.keys.userToken)
+    
+    #if DEBUG
+    static var createTestUser:User {
+        return User.init("XXX TEST USER")
+    }
+    #endif
+    
+    private static var token:String? {
+        return UserDefaults.standard.string(forKey: defaults.userToken)
     }
     
     static func existing() -> User? {
@@ -26,12 +33,15 @@ struct User {
         return User(token)
     }
     
-    init(_ token:String) {
-        UserDefaults.standard.set(token, forKey: UserDefaults.keys.userToken)
+    private init(_ token:String) {
+        UserDefaults.standard.set(token, forKey: defaults.userToken)
+        // restore other user content here
     }
 }
 
+typealias defaults = UserDefaults.keys
 extension UserDefaults {
+    
     enum keys {
         static let userToken = "userToken"
     }

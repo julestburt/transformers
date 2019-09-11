@@ -1,3 +1,4 @@
+#if !os(Linux)
 import XCTest
 
 /// Enhances failure messages with a command line diff tool expression that can be copied and pasted into a terminal.
@@ -31,7 +32,7 @@ public func assertSnapshot<Value, Format>(
   ) {
 
   let failure = verifySnapshot(
-    matching: try value(),
+    matching: value,
     as: snapshotting,
     named: name,
     record: recording,
@@ -64,9 +65,9 @@ public func assertSnapshots<Value, Format>(
   line: UInt = #line
   ) {
 
-  try? strategies.forEach { name, strategy in
+  strategies.forEach { name, strategy in
     assertSnapshot(
-      matching: try value(),
+      matching: value,
       as: strategy,
       named: name,
       record: recording,
@@ -98,9 +99,9 @@ public func assertSnapshots<Value, Format>(
   line: UInt = #line
   ) {
 
-  try? strategies.forEach { strategy in
+  strategies.forEach { strategy in
     assertSnapshot(
-      matching: try value(),
+      matching: value,
       as: strategy,
       record: recording,
       timeout: timeout,
@@ -210,8 +211,6 @@ public func verifySnapshot<Value, Format>(
         return "Exceeded timeout of \(timeout) seconds waiting for snapshot"
       case .incorrectOrder, .invertedFulfillment, .interrupted:
         return "Couldn't snapshot value"
-      @unknown default:
-        return "Couldn't snapshot value"
       }
 
       guard let diffable = optionalDiffable else {
@@ -284,10 +283,9 @@ public func verifySnapshot<Value, Format>(
     }
 }
 
-// MARK: - Private
-
 private let counterQueue = DispatchQueue(label: "co.pointfree.SnapshotTesting.counter")
 private var counterMap: [URL: Int] = [:]
+#endif
 
 func sanitizePathComponent(_ string: String) -> String {
   return string

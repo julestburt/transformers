@@ -1,9 +1,9 @@
 {
-  "commitish" : "1.5.0",
+  "commitish" : "1.3.0",
   "iOS" : [
     {
       "name" : "SnapshotTesting",
-      "hash" : "75e9936066df03d1705aefed53132e001984f0e140ac84bf134299d99d0914d8"
+      "hash" : "82151100252a60732bec96d7bbf993da397ead2aa9ec557766be71703beaa2fe"
     }
   ]
 }
