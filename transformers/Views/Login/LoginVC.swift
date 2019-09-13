@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol LoginDisplay {
     func didLogin()
@@ -15,22 +16,18 @@ protocol LoginDisplay {
 
 extension LoginVC : LoginDisplay {
     func didLogin() {
-        gettingSpark = false
+        getSparkButton.isEnabled = true
         show(transformers)
-//        dismiss(animated: true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
     }
     func failedLogin(_ msg: String) {
         print("error logging in - \(msg)")
-        gettingSpark = false
+        // display Error msg here!
+        getSparkButton.isEnabled = true
     }
 }
 
 class LoginVC : UIViewController{
-    
     @IBOutlet weak var getSparkButton: UIButton!
-    override func viewDidLoad() {
-        //
-    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -59,8 +56,7 @@ class LoginVC : UIViewController{
 
     var gettingSpark:Bool = false
     @IBAction func getSpark(_ sender: UIButton) {
-        guard !gettingSpark else { return }
-        gettingSpark = true
+        sender.isEnabled = false
         interactor?.getSpark()
     }
 }
@@ -70,13 +66,21 @@ protocol LoginInteractorLogic {
 }
 
 class LoginInteractor : LoginInteractorLogic {
-    var presenter:LoginPresenterLogic? = nil
     func getSpark() {
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: .now() + 2) {
-            // got token?
-            _ = User.createTestUser
-            self.presenter?.confirmLogin(true, error: nil)
-        }
+        getSpark(3)
+    }
+    
+    var presenter:LoginPresenterLogic? = nil
+    func getSpark(_ retries:Int = 3) {
+//        FireBase.getAllSpark()
+//            .then { token in
+//                Current.user = User(token)
+//                self.presenter?.confirmLogin(true, error: nil)  //Maybe?
+//            }
+//            .onError { (error) in
+//                print("error:\(error.localizedDescription)")
+//                self.presenter?.confirmLogin(false, error: "\(error.localizedDescription)")
+//        }
     }
 }
 

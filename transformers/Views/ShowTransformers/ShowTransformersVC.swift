@@ -8,18 +8,44 @@
 
 import UIKit
 
+//------------------------------------------------------------------------------
+// MARK: View Display
+//------------------------------------------------------------------------------
+
 protocol ShowTransformersDisplay {
     func showTransformers(_ transformerList:[ShowTransformer.Display.Transformer])
 }
 
-class ShowTransformersVC : UIViewController, ShowTransformersDisplay {
-    
-    @IBOutlet weak var table: UITableView!
-    var transformers:[ShowTransformer.Display.Transformer]? = nil
+extension ShowTransformersVC : ShowTransformersDisplay {
     func showTransformers(_ transformerList: [ShowTransformer.Display.Transformer]) {
         transformers = transformerList
+        table.reloadData()
     }
     
+    func createTransformer() {
+        present(UIViewController.named("CreateTransformer"), animated: true) {
+            self.interactor?.getTransformers()
+        }
+    }
+}
+
+//------------------------------------------------------------------------------
+// MARK: View Controller
+//------------------------------------------------------------------------------
+class ShowTransformersVC : UIViewController {
+    @IBOutlet weak var table: UITableView!
+    var transformers:[ShowTransformer.Display.Transformer]? = nil
+    
+    
+    override func viewDidLoad() {
+        table.dataSource = self
+        table.delegate = self
+        interactor?.getTransformers()
+    }
+    
+    //------------------------------------------------------------------------------
+    // MARK: View Setup
+    //------------------------------------------------------------------------------
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
@@ -28,12 +54,6 @@ class ShowTransformersVC : UIViewController, ShowTransformersDisplay {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
-    }
-    
-    override func viewDidLoad() {
-        table.dataSource = self
-        table.delegate = self
-        interactor?.getTransformers()
     }
     
     var interactor:ShowTransformerLogic? = nil
@@ -47,24 +67,32 @@ class ShowTransformersVC : UIViewController, ShowTransformersDisplay {
     }
 }
 
+//------------------------------------------------------------------------------
+// MARK: TableView
+//------------------------------------------------------------------------------
 extension ShowTransformersVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transformers?.count ?? 1
+        guard let count = transformers?.count, count > 0 else { return 1 }
+        return count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return transformers?.count != nil ? 50 : 80
+        guard let count = transformers?.count, count > 0 else { return 170 }
+        return 70
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        guard let transformer = transformers?[indexPath.row],
+        guard let count = transformers?.count, count > 0, let transformer = transformers?[indexPath.row],
             let cell = table.dequeueReusableCell(withIdentifier: "\(transformer.teamName)Cell")
-            else {
-            return table.dequeueReusableCell(withIdentifier: "EmptyCell") as! EmptyCell
+            else { let emptyCell =  table.dequeueReusableCell(withIdentifier: "EmptyCell")
+                as! EmptyCell
+                emptyCell.delegate = {
+                    self.createTransformer()
+                }
+                return emptyCell
         }
-//        cell.setup()
+        
+        //        cell.setup()
         return cell
     }
     
@@ -120,6 +148,52 @@ class ShowTransformerPresenter : ShowTransformerPresenterLogic {
     }
 }
 
+class TransformerCell : UITableViewCell {
+    
+    @IBOutlet weak var imageContainer: UIView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var rating: UILabel!
+    
+    func setup(_ name:String, image:UIImage, rating:Int) {
+        let imageView = UIImageView(frame: imageContainer.bounds)
+        imageView.image = image
+        imageContainer.addSubview(imageView)
+        self.name.text = name
+        self.rating.text = "\(rating)"
+    }
+}
+
 class EmptyCell : UITableViewCell {
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    @IBOutlet weak var createButton: UIButton!
+    @IBAction func createTransformer(_ sender: Any) {
+        createButton.isEnabled = false
+        delegate?()
+    }
+
+    var delegate:(()->Void)? = nil
+    func setCallBack(_ callback:@escaping ()->Void) {
+        delegate = callback
+    }
 }
+
+extension UITableViewCell {
+    func applyShadowToCell() {
+        self.layer.shadowColor = UIColor(red: 38/255, green: 38/255, blue: 38/255, alpha: 0.13).cgColor
+        self.layer.shadowOffset =  CGSize(width: 0, height: 8)
+        self.layer.shadowRadius = 16.0
+        self.layer.shadowOpacity = 1.0
+        self.layer.masksToBounds = false
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.contentView.layer.cornerRadius).cgPath
+    }
+}
+

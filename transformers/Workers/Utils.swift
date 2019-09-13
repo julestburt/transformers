@@ -8,10 +8,9 @@
 
 import UIKit
 
-extension UIViewController {
-    #if DEBUG
-    @objc func injected() {
-        viewDidLoad()
+typealias defaults = UserDefaults.keys
+extension UserDefaults {
+    enum keys {
+        static let userToken = "userToken"
     }
-    #endif
 }

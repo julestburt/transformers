@@ -13,12 +13,12 @@ class Transformers {
     let transformers:[Transformer] = []
 }
 
-enum Team : String {
-    case autobot
-    case decepticon
+enum Team : String , Encodable{
+    case autobot = "A"
+    case decepticon = "D"
 }
 
-struct Transformer {
+struct Transformer: Encodable {
     let id:String
     let name:String
     let strength:Int
@@ -36,4 +36,16 @@ struct Transformer {
     var image:UIImage? {
         return UIImage(named: self.team.rawValue)
     }
+    
+    var createJSON:String? {
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(self)
+            let jsonString = String(data: jsonData, encoding: .utf8)
+            return jsonString
+        } catch {
+            return nil
+        }
+    }
+
 }

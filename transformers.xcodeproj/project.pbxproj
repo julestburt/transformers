@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8473730D232773FC00B6E697 /* FireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473730C232773FC00B6E697 /* FireBase.swift */; };
+		8473730F23289DF200B6E697 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473730E23289DF200B6E697 /* EnvironmentTests.swift */; };
+		847373112328A76F00B6E697 /* LoginVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847373102328A76F00B6E697 /* LoginVCTests.swift */; };
 		847C43502325A31C00E6BC32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C434F2325A31C00E6BC32 /* AppDelegate.swift */; };
 		847C43522325A31C00E6BC32 /* CreateTransformerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */; };
 		847C43552325A31C00E6BC32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847C43532325A31C00E6BC32 /* Main.storyboard */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		8473730C232773FC00B6E697 /* FireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBase.swift; sourceTree = "<group>"; };
+		8473730E23289DF200B6E697 /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
+		847373102328A76F00B6E697 /* LoginVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCTests.swift; sourceTree = "<group>"; };
 		847C434C2325A31C00E6BC32 /* transformers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transformers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		847C434F2325A31C00E6BC32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransformerVC.swift; sourceTree = "<group>"; };
@@ -95,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		847373122328C0CF00B6E697 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				8473730C232773FC00B6E697 /* FireBase.swift */,
+				847C43722325AA2300E6BC32 /* APIService.swift */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
 		847C43432325A31C00E6BC32 = {
 			isa = PBXGroup;
 			children = (
@@ -118,7 +131,6 @@
 		847C434E2325A31C00E6BC32 /* transformers */ = {
 			isa = PBXGroup;
 			children = (
-				84882F992326FBF2008D15E2 /* Environment.swift */,
 				847C43702325A9EC00E6BC32 /* Views */,
 				847C43712325A9F600E6BC32 /* Storyboards */,
 				84882F982326E786008D15E2 /* Models */,
@@ -133,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				847C43662325A31E00E6BC32 /* Info.plist */,
+				8473730E23289DF200B6E697 /* EnvironmentTests.swift */,
 				84E3DE352326DE5E005E621A /* Views */,
 			);
 			path = transformersTests;
@@ -172,8 +185,7 @@
 		847C43742325AA2800E6BC32 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				8473730C232773FC00B6E697 /* FireBase.swift */,
-				847C43722325AA2300E6BC32 /* APIService.swift */,
+				847373122328C0CF00B6E697 /* APIService */,
 				84E3DE1E2325E76F005E621A /* Utils.swift */,
 				84E3DE222325EA32005E621A /* Functional.swift */,
 			);
@@ -183,6 +195,7 @@
 		84882F982326E786008D15E2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84882F992326FBF2008D15E2 /* Environment.swift */,
 				84882F962326E782008D15E2 /* Transformer.swift */,
 			);
 			path = Models;
@@ -229,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */,
+				847373102328A76F00B6E697 /* LoginVCTests.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -394,6 +408,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				847C43652325A31E00E6BC32 /* CreateTransformerVCTests.swift in Sources */,
+				8473730F23289DF200B6E697 /* EnvironmentTests.swift in Sources */,
+				847373112328A76F00B6E697 /* LoginVCTests.swift in Sources */,
 				84B81D482325C78E00260CCD /* CreateTransformerModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

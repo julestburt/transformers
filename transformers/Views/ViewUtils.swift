@@ -66,4 +66,16 @@ extension UIViewController {
         }
     }
 
+    static func named(_ name:String, storyboard:String = "Main") -> UIViewController {
+        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: name)
+    }
+
+    #if DEBUG
+    @objc func injected() {
+        viewDidLoad()
+    }
+    #endif
+    
+
 }

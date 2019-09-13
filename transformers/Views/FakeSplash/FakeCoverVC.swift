@@ -10,10 +10,8 @@ import UIKit
 
 class FakeCoverVC : UIViewController {
     override func viewDidLoad() {
-        print("On fake cover")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
             self.dismiss(animated: true) {
-                //
             }
         }
     }

@@ -13,12 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        
         #if DEBUG
-        Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle")?.load()
+//  UserDefaults.standard.set("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0cmFuc2Zvcm1lcnNJZCI6Ii1Mb1RvVEVsZENqQm5aQTJycUowIiwiaWF0IjoxNTY4MTgwMTM0fQ.G0VrPMTpd5zQMlKVr1w3cHExXHgN0GIE01I62a5VSUs", forKey: defaults.userToken)
+        print("User token:\(User.token ?? "nil")")
+//        User.clearStoredUser()
+//        Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle")?.load()
         #endif
         
         return true

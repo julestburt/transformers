@@ -11,7 +11,7 @@ import XCTest
 
 @testable import transformers
 
-class CreateTransformerTests: XCTestCase {
+class CreateTransformerTestsVC: XCTestCase {
     
     var sut:CreateTransformerVC!
     var window :UIWindow!
@@ -45,7 +45,7 @@ class CreateTransformerTests: XCTestCase {
         loadView()
         if let first = sut.transformerProperties.first {
             XCTAssert(first.rawValue == TransformerProperty.init(rawValue:TransformerProperties[0])!.rawValue, "Failed to find the first transformer value")
-        }
+        } else { XCTFail("Found no tranformers in view")}
         for (idx, eachProperty) in sut.transformerProperties.enumerated() {
                 XCTAssert(eachProperty.rawValue == TransformerProperties[idx], "Failed to find all expected values")
         }

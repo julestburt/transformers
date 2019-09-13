@@ -22,9 +22,13 @@ struct User {
     static var createTestUser:User {
         return User.init("XXX TEST USER")
     }
+
+    static func clearStoredUser() {
+        UserDefaults.standard.removeObject(forKey: defaults.userToken)
+    }
     #endif
-    
-    private static var token:String? {
+
+    static var token:String? {
         return UserDefaults.standard.string(forKey: defaults.userToken)
     }
     
@@ -32,18 +36,13 @@ struct User {
         guard let token = User.token else { return nil }
         return User(token)
     }
+    var exists:Bool {
+        return User.token != nil
+    }
     
-    private init(_ token:String) {
+    init(_ token:String) {
         UserDefaults.standard.set(token, forKey: defaults.userToken)
         // restore other user content here
-    }
-}
-
-typealias defaults = UserDefaults.keys
-extension UserDefaults {
-    
-    enum keys {
-        static let userToken = "userToken"
     }
 }
 

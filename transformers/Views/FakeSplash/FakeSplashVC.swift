@@ -11,19 +11,16 @@ import UIKit
 class FakeSplashVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
-        let startView = Current.user != nil ?
-            transformers : login
-        self.show(startView)
+        show ( Current.user == nil ? login : transformers )
     }
 
     var login:UIViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: "Login")
+        return UIViewController.named("Login")
     }
     
     var transformers:UIViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: "ShowTransformers")
+        return UIViewController.named("ShowTransformers")
     }
     
 }
+
