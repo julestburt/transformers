@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840FE9E3232BFB45009898DC /* then.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 840FE9E2232BFB45009898DC /* then.framework */; };
 		8473730D232773FC00B6E697 /* FireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473730C232773FC00B6E697 /* FireBase.swift */; };
 		8473730F23289DF200B6E697 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473730E23289DF200B6E697 /* EnvironmentTests.swift */; };
 		847373112328A76F00B6E697 /* LoginVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847373102328A76F00B6E697 /* LoginVCTests.swift */; };
@@ -20,20 +21,32 @@
 		84882F972326E782008D15E2 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84882F962326E782008D15E2 /* Transformer.swift */; };
 		84882F9A2326FBF2008D15E2 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84882F992326FBF2008D15E2 /* Environment.swift */; };
 		84882F9C232700EB008D15E2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84882F9B232700EB008D15E2 /* LoginVC.swift */; };
-		84B81D3F2325AE5D00260CCD /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 84B81D3E2325AE5D00260CCD /* Cartfile */; };
+		84A71E1A232C5B6000023B60 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A71E19232C5B6000023B60 /* LoginInteractor.swift */; };
+		84A71E1C232C5B7200023B60 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A71E1B232C5B7200023B60 /* LoginPresenter.swift */; };
+		84A71E1E232C871600023B60 /* FakeSplashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A71E1D232C871600023B60 /* FakeSplashTests.swift */; };
+		84A71E20232EB21F00023B60 /* CreateTranformerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A71E1F232EB21F00023B60 /* CreateTranformerInteractor.swift */; };
+		84A71E22232EB24000023B60 /* CreateTransformerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A71E21232EB24000023B60 /* CreateTransformerPresenter.swift */; };
 		84B81D432325B0D500260CCD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B81D412325B0D500260CCD /* Alamofire.framework */; };
 		84B81D442325B0D500260CCD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B81D422325B0D500260CCD /* SwiftyJSON.framework */; };
 		84B81D472325C76200260CCD /* CreateTransformerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81D462325C76200260CCD /* CreateTransformerModel.swift */; };
-		84B81D482325C78E00260CCD /* CreateTransformerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81D462325C76200260CCD /* CreateTransformerModel.swift */; };
 		84B81D4B2325CCAC00260CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847C43532325A31C00E6BC32 /* Main.storyboard */; };
 		84E3DE1F2325E76F005E621A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE1E2325E76F005E621A /* Utils.swift */; };
 		84E3DE212325E7CF005E621A /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE202325E7CF005E621A /* ViewUtils.swift */; };
-		84E3DE232325EA32005E621A /* Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE222325EA32005E621A /* Functional.swift */; };
 		84E3DE2523262E8D005E621A /* FakeSplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE2423262E8D005E621A /* FakeSplashVC.swift */; };
 		84E3DE272326A267005E621A /* ShowTransformersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE262326A267005E621A /* ShowTransformersVC.swift */; };
 		84E3DE292326A9ED005E621A /* FakeCover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E3DE282326A9ED005E621A /* FakeCover.xib */; };
 		84E3DE2B2326AAA2005E621A /* FakeCoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */; };
 		84E3DE2D2326B2ED005E621A /* BattleTransformersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */; };
+		84F02DC02330B1A300169395 /* ShowTransformersInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DBF2330B1A300169395 /* ShowTransformersInteractor.swift */; };
+		84F02DC22330B1DF00169395 /* ShowTransformersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DC12330B1DF00169395 /* ShowTransformersPresenter.swift */; };
+		84F02DC42330B21100169395 /* ShowTransformersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DC32330B21100169395 /* ShowTransformersModel.swift */; };
+		84F02DC62330B82200169395 /* LoginPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DC52330B82200169395 /* LoginPresenterTests.swift */; };
+		84F02DC82330BD7100169395 /* LoginInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DC72330BD7100169395 /* LoginInteractorTests.swift */; };
+		84F02DCA2331D00200169395 /* BattleLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DC92331D00200169395 /* BattleLogic.swift */; };
+		84F02DCC2331D03600169395 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DCB2331D03600169395 /* User.swift */; };
+		84F02DCF2332105700169395 /* MockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DCE2332105700169395 /* MockAPI.swift */; };
+		84F02DD1233234EC00169395 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 84F02DD0233234EB00169395 /* Cartfile */; };
+		84F02DD3233235CB00169395 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 84F02DD2233235CA00169395 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		840FE9E0232BFB3C009898DC /* then.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = then.framework.dSYM; path = Carthage/Build/iOS/then.framework.dSYM; sourceTree = "<group>"; };
+		840FE9E2232BFB45009898DC /* then.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = then.framework; path = Carthage/Build/iOS/then.framework; sourceTree = "<group>"; };
 		8473730C232773FC00B6E697 /* FireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBase.swift; sourceTree = "<group>"; };
 		8473730E23289DF200B6E697 /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
 		847373102328A76F00B6E697 /* LoginVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCTests.swift; sourceTree = "<group>"; };
@@ -64,19 +79,32 @@
 		84882F962326E782008D15E2 /* Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		84882F992326FBF2008D15E2 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		84882F9B232700EB008D15E2 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		84B81D3E2325AE5D00260CCD /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Cartfile; sourceTree = "<group>"; };
+		84A71E19232C5B6000023B60 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		84A71E1B232C5B7200023B60 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		84A71E1D232C871600023B60 /* FakeSplashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSplashTests.swift; sourceTree = "<group>"; };
+		84A71E1F232EB21F00023B60 /* CreateTranformerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTranformerInteractor.swift; sourceTree = "<group>"; };
+		84A71E21232EB24000023B60 /* CreateTransformerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransformerPresenter.swift; sourceTree = "<group>"; };
 		84B81D412325B0D500260CCD /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		84B81D422325B0D500260CCD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		84B81D462325C76200260CCD /* CreateTransformerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransformerModel.swift; sourceTree = "<group>"; };
 		84E3DE1E2325E76F005E621A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		84E3DE202325E7CF005E621A /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
-		84E3DE222325EA32005E621A /* Functional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functional.swift; sourceTree = "<group>"; };
 		84E3DE2423262E8D005E621A /* FakeSplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSplashVC.swift; sourceTree = "<group>"; };
 		84E3DE262326A267005E621A /* ShowTransformersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTransformersVC.swift; sourceTree = "<group>"; };
 		84E3DE282326A9ED005E621A /* FakeCover.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FakeCover.xib; sourceTree = "<group>"; };
 		84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCoverVC.swift; sourceTree = "<group>"; };
 		84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleTransformersVC.swift; sourceTree = "<group>"; };
 		84E3DE312326D83A005E621A /* SnapshotTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapshotTesting.framework; path = Carthage/Build/iOS/SnapshotTesting.framework; sourceTree = "<group>"; };
+		84F02DBF2330B1A300169395 /* ShowTransformersInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTransformersInteractor.swift; sourceTree = "<group>"; };
+		84F02DC12330B1DF00169395 /* ShowTransformersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTransformersPresenter.swift; sourceTree = "<group>"; };
+		84F02DC32330B21100169395 /* ShowTransformersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTransformersModel.swift; sourceTree = "<group>"; };
+		84F02DC52330B82200169395 /* LoginPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterTests.swift; sourceTree = "<group>"; };
+		84F02DC72330BD7100169395 /* LoginInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractorTests.swift; sourceTree = "<group>"; };
+		84F02DC92331D00200169395 /* BattleLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleLogic.swift; sourceTree = "<group>"; };
+		84F02DCB2331D03600169395 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		84F02DCE2332105700169395 /* MockAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPI.swift; sourceTree = "<group>"; };
+		84F02DD0233234EB00169395 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
+		84F02DD2233235CA00169395 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +114,7 @@
 			files = (
 				84B81D432325B0D500260CCD /* Alamofire.framework in Frameworks */,
 				84B81D442325B0D500260CCD /* SwiftyJSON.framework in Frameworks */,
+				840FE9E3232BFB45009898DC /* then.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +140,7 @@
 		847C43432325A31C00E6BC32 = {
 			isa = PBXGroup;
 			children = (
-				84B81D3E2325AE5D00260CCD /* Cartfile */,
+				84F02DD2233235CA00169395 /* README.md */,
 				847C434E2325A31C00E6BC32 /* transformers */,
 				847C43632325A31E00E6BC32 /* transformersTests */,
 				847C434D2325A31C00E6BC32 /* Products */,
@@ -131,10 +160,13 @@
 		847C434E2325A31C00E6BC32 /* transformers */ = {
 			isa = PBXGroup;
 			children = (
+				84882F992326FBF2008D15E2 /* Environment.swift */,
+				84F02DCB2331D03600169395 /* User.swift */,
+				84882F982326E786008D15E2 /* Models */,
 				847C43702325A9EC00E6BC32 /* Views */,
 				847C43712325A9F600E6BC32 /* Storyboards */,
-				84882F982326E786008D15E2 /* Models */,
 				847C43742325AA2800E6BC32 /* Workers */,
+				84F02DD0233234EB00169395 /* Cartfile */,
 				847C436F2325A9D800E6BC32 /* App */,
 				847C43562325A31D00E6BC32 /* Assets.xcassets */,
 			);
@@ -147,6 +179,7 @@
 				847C43662325A31E00E6BC32 /* Info.plist */,
 				8473730E23289DF200B6E697 /* EnvironmentTests.swift */,
 				84E3DE352326DE5E005E621A /* Views */,
+				84F02DCE2332105700169395 /* MockAPI.swift */,
 			);
 			path = transformersTests;
 			sourceTree = "<group>";
@@ -164,11 +197,11 @@
 		847C43702325A9EC00E6BC32 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84E6B91D23276E99006165FD /* Login */,
 				84E3DE2E2326BDB7005E621A /* FakeSplash */,
+				84E6B91D23276E99006165FD /* Login */,
 				84E3DE302326BDD7005E621A /* ShowTransformers */,
 				84E3DE2F2326BDC8005E621A /* CreateTransformer */,
-				84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */,
+				84F02DCD2332099700169395 /* BattleMode */,
 				84E3DE202325E7CF005E621A /* ViewUtils.swift */,
 			);
 			path = Views;
@@ -187,7 +220,6 @@
 			children = (
 				847373122328C0CF00B6E697 /* APIService */,
 				84E3DE1E2325E76F005E621A /* Utils.swift */,
-				84E3DE222325EA32005E621A /* Functional.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -195,8 +227,8 @@
 		84882F982326E786008D15E2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				84882F992326FBF2008D15E2 /* Environment.swift */,
 				84882F962326E782008D15E2 /* Transformer.swift */,
+				84F02DC92331D00200169395 /* BattleLogic.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,6 +236,8 @@
 		84B81D402325B0D500260CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				840FE9E2232BFB45009898DC /* then.framework */,
+				840FE9E0232BFB3C009898DC /* then.framework.dSYM */,
 				84E3DE312326D83A005E621A /* SnapshotTesting.framework */,
 				84B81D412325B0D500260CCD /* Alamofire.framework */,
 				84B81D422325B0D500260CCD /* SwiftyJSON.framework */,
@@ -226,6 +260,8 @@
 			children = (
 				847C43512325A31C00E6BC32 /* CreateTransformerVC.swift */,
 				84B81D462325C76200260CCD /* CreateTransformerModel.swift */,
+				84A71E21232EB24000023B60 /* CreateTransformerPresenter.swift */,
+				84A71E1F232EB21F00023B60 /* CreateTranformerInteractor.swift */,
 			);
 			path = CreateTransformer;
 			sourceTree = "<group>";
@@ -234,6 +270,9 @@
 			isa = PBXGroup;
 			children = (
 				84E3DE262326A267005E621A /* ShowTransformersVC.swift */,
+				84F02DC32330B21100169395 /* ShowTransformersModel.swift */,
+				84F02DC12330B1DF00169395 /* ShowTransformersPresenter.swift */,
+				84F02DBF2330B1A300169395 /* ShowTransformersInteractor.swift */,
 			);
 			path = ShowTransformers;
 			sourceTree = "<group>";
@@ -243,6 +282,9 @@
 			children = (
 				847C43642325A31E00E6BC32 /* CreateTransformerVCTests.swift */,
 				847373102328A76F00B6E697 /* LoginVCTests.swift */,
+				84F02DC52330B82200169395 /* LoginPresenterTests.swift */,
+				84F02DC72330BD7100169395 /* LoginInteractorTests.swift */,
+				84A71E1D232C871600023B60 /* FakeSplashTests.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,8 +293,18 @@
 			isa = PBXGroup;
 			children = (
 				84882F9B232700EB008D15E2 /* LoginVC.swift */,
+				84A71E1B232C5B7200023B60 /* LoginPresenter.swift */,
+				84A71E19232C5B6000023B60 /* LoginInteractor.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		84F02DCD2332099700169395 /* BattleMode */ = {
+			isa = PBXGroup;
+			children = (
+				84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */,
+			);
+			path = BattleMode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,10 +389,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F02DD3233235CB00169395 /* README.md in Resources */,
+				84F02DD1233234EC00169395 /* Cartfile in Resources */,
 				847C435A2325A31D00E6BC32 /* LaunchScreen.storyboard in Resources */,
 				847C43572325A31D00E6BC32 /* Assets.xcassets in Resources */,
 				847C43552325A31C00E6BC32 /* Main.storyboard in Resources */,
-				84B81D3F2325AE5D00260CCD /* Cartfile in Resources */,
 				84E3DE292326A9ED005E621A /* FakeCover.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +419,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/then.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -373,6 +427,7 @@
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/then.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -385,21 +440,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F02DCA2331D00200169395 /* BattleLogic.swift in Sources */,
+				84A71E1C232C5B7200023B60 /* LoginPresenter.swift in Sources */,
+				84F02DC42330B21100169395 /* ShowTransformersModel.swift in Sources */,
 				84E3DE1F2325E76F005E621A /* Utils.swift in Sources */,
-				84E3DE232325EA32005E621A /* Functional.swift in Sources */,
 				84882F9C232700EB008D15E2 /* LoginVC.swift in Sources */,
 				847C43522325A31C00E6BC32 /* CreateTransformerVC.swift in Sources */,
 				8473730D232773FC00B6E697 /* FireBase.swift in Sources */,
+				84F02DC22330B1DF00169395 /* ShowTransformersPresenter.swift in Sources */,
 				84E3DE2523262E8D005E621A /* FakeSplashVC.swift in Sources */,
 				84E3DE212325E7CF005E621A /* ViewUtils.swift in Sources */,
 				847C43732325AA2300E6BC32 /* APIService.swift in Sources */,
+				84A71E20232EB21F00023B60 /* CreateTranformerInteractor.swift in Sources */,
 				84E3DE272326A267005E621A /* ShowTransformersVC.swift in Sources */,
+				84A71E1A232C5B6000023B60 /* LoginInteractor.swift in Sources */,
 				84882F972326E782008D15E2 /* Transformer.swift in Sources */,
 				84882F9A2326FBF2008D15E2 /* Environment.swift in Sources */,
 				847C43502325A31C00E6BC32 /* AppDelegate.swift in Sources */,
+				84A71E22232EB24000023B60 /* CreateTransformerPresenter.swift in Sources */,
 				84B81D472325C76200260CCD /* CreateTransformerModel.swift in Sources */,
+				84F02DC02330B1A300169395 /* ShowTransformersInteractor.swift in Sources */,
 				84E3DE2D2326B2ED005E621A /* BattleTransformersVC.swift in Sources */,
 				84E3DE2B2326AAA2005E621A /* FakeCoverVC.swift in Sources */,
+				84F02DCC2331D03600169395 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,9 +471,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				847C43652325A31E00E6BC32 /* CreateTransformerVCTests.swift in Sources */,
+				84A71E1E232C871600023B60 /* FakeSplashTests.swift in Sources */,
 				8473730F23289DF200B6E697 /* EnvironmentTests.swift in Sources */,
+				84F02DCF2332105700169395 /* MockAPI.swift in Sources */,
 				847373112328A76F00B6E697 /* LoginVCTests.swift in Sources */,
-				84B81D482325C78E00260CCD /* CreateTransformerModel.swift in Sources */,
+				84F02DC82330BD7100169395 /* LoginInteractorTests.swift in Sources */,
+				84F02DC62330B82200169395 /* LoginPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,8 +632,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZU9YSQ22FQ;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -580,7 +648,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bethegame..transformers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -589,8 +657,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZU9YSQ22FQ;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -603,7 +673,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bethegame..transformers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -12,5 +12,7 @@ typealias defaults = UserDefaults.keys
 extension UserDefaults {
     enum keys {
         static let userToken = "userToken"
+        static let transformerStore = "transformerStore"
+        static let isTesting = "isTesting"
     }
 }

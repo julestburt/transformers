@@ -8,31 +8,12 @@
 
 import Foundation
 
-let TransformerProperties =
-    ["strength","intelligence","speed","endurance","rank","courage","firepower","skill"]
-
 enum CreateTransformerModel {
     enum Create {
-        /*
-         {
-         "id": 0,
-         "name": "string",
-         "team": "string",
-         "strength": 0,
-         "intelligence": 0,
-         "speed": 0,
-         "endurance": 0,
-         "rank": 0,
-         "courage": 0,
-         "firepower": 0,
-         "skill": 0
-         }
-         */
         struct NewTransformer {
             let name:String
             let team:String
             let properties:[String:Int]
-            
 //            var strength:Int
 //            var intelligence:Int
 //            var speed:Int
@@ -41,6 +22,14 @@ enum CreateTransformerModel {
 //            var courage:Int
 //            var firepower:Int
 //            var skill:Int
+        }
+    }
+    enum Created {
+        struct CreatedTransformer {
+            let name:String
+            let rating:Int
+            let team:String
+            let imageName:String
         }
     }
 }

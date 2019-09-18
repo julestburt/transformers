@@ -8,26 +8,55 @@
 
 import XCTest
 
+@testable import transformers
+
 class LoginInteractorTests: XCTestCase {
-
+    
+    var sut:LoginInteractor!
+    var spy:LoginPresenterSpy!
+    var window :UIWindow!
+    var mockAPI = MockAPI()
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        setup()
     }
-
+    
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func setup() {
+        spy = LoginPresenterSpy()
+        sut = LoginInteractor()
+        sut.presenter = spy
+        User.clearStoredUser()
+        Current.apiService = mockAPI
     }
+    
+    func testLoginAttempt() {
+        sut.getSpark()
+        sleep(1)
+        XCTAssert(spy.confirmedLogin == true, "interactor failed to notify of successful login")
+        mockAPI.allSparkFail = true
+        sut.getSpark()
+        sleep(1)
+        XCTAssert(spy.confirmedFail == true, "interactor failed to notify presenter of successful login")
+    }
+}
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+class LoginPresenterSpy : LoginPresenterLogic {
+    var confirmedLogin = false
+    var confirmedFail = false
+    var failMsg:String? = nil
+    func confirmLogin(_ success: Bool, error: String?) {
+        if success {
+            confirmedLogin = true
+        } else {
+            confirmedFail = true
+            failMsg = error
         }
+        
     }
-
+    
 }

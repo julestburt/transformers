@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+//------------------------------------------------------------------------------
+// MARK: Login Presenter Logic
+//------------------------------------------------------------------------------
+protocol LoginPresenterLogic {
+    func confirmLogin(_ success:Bool, error:String?)
+}
+
+//------------------------------------------------------------------------------
+// MARK: Login Presenter - a simple pass through, but anables testing!
+//------------------------------------------------------------------------------
+class LoginPresenter : LoginPresenterLogic {
+    var view:LoginDisplay?
+    func confirmLogin(_ success: Bool, error: String?) {
+        success ? view?.didLogin() : view?.failedLogin(error!)
+    }
+}

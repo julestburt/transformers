@@ -8,14 +8,20 @@
 
 import UIKit
 
+//------------------------------------------------------------------------------
+// MARK:  Fake Splash Landing (Launchscreen) and app routing
+//------------------------------------------------------------------------------
+
 class FakeSplashVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
+        guard UserDefaults.standard.bool(forKey: UserDefaults.keys.isTesting) != true else { return }
+        
         show ( Current.user == nil ? login : transformers )
     }
 
     var login:UIViewController {
-        return UIViewController.named("Login")
+       return UIViewController.named("Login")
     }
     
     var transformers:UIViewController {

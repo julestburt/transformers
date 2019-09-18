@@ -8,65 +8,115 @@
 
 import UIKit
 
-protocol CreateTranformerDisplay {
-    func showConfirmationCreated(_ transformerName:String)
+//------------------------------------------------------------------------------
+// MARK: View Interactions
+//------------------------------------------------------------------------------
+protocol CreateTransformerDisplay {
+    func showConfirmationCreated(_ transformerName:CreateTransformerModel.Created.CreatedTransformer)
 }
 
-extension CreateTransformerVC :CreateTranformerDisplay {
-    func showConfirmationCreated(_ transformerName:String) {
-        let alertview = UIAlertController(title: "Transformer Created", message: "Success!! Get ready to fight...with 2 or more Transformers!", preferredStyle: UIAlertController.Style.actionSheet)
+extension CreateTransformerVC :CreateTransformerDisplay {
+    func showConfirmationCreated(_ transformer:CreateTransformerModel.Created.CreatedTransformer) {
+        let alertview = UIAlertController(title: "\(transformer.name) Created", message: "Success!! Get ready to fight...with 2 or more Transformers! Rating:\(transformer.rating)", preferredStyle: UIAlertController.Style.actionSheet)
         present(alertview, animated: true) {
+                self.dismiss(animated: true, completion: {
+                    self.closeCreateView()
+                })
+        }
+    }
+    
+    func closeCreateView() {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             self.dismiss(animated: true, completion: nil)
+
         }
     }
 }
 
+//------------------------------------------------------------------------------
+// MARK: View Controller & Setup
+//------------------------------------------------------------------------------
 class CreateTransformerVC : UIViewController {
-    
+    var editExistingID:String? {
+        return Current.editTransformer
+    }
     // Creating a new Transformer sets this default property
     let DefaultValue = 5
 
     // initial testsetup
+    @IBOutlet weak var titleHeight: NSLayoutConstraint!
     @IBOutlet weak var typeSelection: UISegmentedControl!
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var valuesTable: UITableView!
+    @IBOutlet weak var valuesTableHeight: NSLayoutConstraint!
     @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     var transformerProperties:[String:Int] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        // Do any additional setup after loading the view.
+    }
+    
+    fileprivate func setupTransformerInView() {
+        guard let editID = editExistingID, let editableTransformer = Transformers.current.transformerForID(editID) else {
+            _ = TransformerProperties.map { transformerProperties[$0] = DefaultValue }
+            typeSelection.selectedSegmentIndex = 0
+            name.text = nil
+            return
+        }
+        name.text = editableTransformer.name
+        typeSelection.selectedSegmentIndex = editableTransformer.team == .autobot ? 0 : 1
+        transformerProperties = [
+            "strength" : editableTransformer.strength,
+            "intelligence" : editableTransformer.intelligence,
+            "speed" : editableTransformer.speed,
+            "endurance" : editableTransformer.endurance,
+            "rank" : editableTransformer.rank,
+            "courage" : editableTransformer.courage,
+            "firepower" : editableTransformer.firepower,
+            "skill" : editableTransformer.skill
+        ]
+        
     }
     
     func setupView () {
-        _ = TransformerProperties.map { transformerProperties[$0] = DefaultValue}
-        typeSelection.selectedSegmentIndex = 0
-        name.text = nil
+        setupTransformerInView()
+        createButton.layer.cornerRadius = 5
+        closeButton.layer.cornerRadius = closeButton.bounds.size.width / 2
+        closeButton.addTarget(self, action: #selector(close), for: UIControl.Event.touchUpInside)
         valuesTable.dataSource = self
         valuesTable.delegate = self
+        valuesTable.reloadData()
     }
+    
+    var creatingAlready:Bool = false
     @IBAction func create(_ sender: UIButton) {
+        guard !creatingAlready else { return }
         guard let name = name.text, name != "" else {
-            // display error
+            let alertview = UIAlertController(title: "Need a Name", message: "Create a Transformer with a name!", preferredStyle: UIAlertController.Style.actionSheet)
+            alertview.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.dismiss(animated:true, completion: nil)
+            }))
+            present(alertview, animated: true, completion: nil)
             return
         }
-        createButton.isEnabled = false
+        
+        creatingAlready = true
         
         let request = CreateTransformerModel.Create.NewTransformer(name: name, team: typeSelection.selectedSegmentIndex == 0 ? Team.autobot.rawValue : Team.decepticon.rawValue, properties: transformerProperties)
         interactor?.createTransformer(request)
     }
-    
-    //------------------------------------------------------------------------------
-    // MARK: View Controller
-    //------------------------------------------------------------------------------
 
-    
+@objc func close() {
+    self.dismiss(animated: true)
+}
+
+
     
     //------------------------------------------------------------------------------
     // MARK: Setup
     //------------------------------------------------------------------------------
-
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -80,41 +130,13 @@ class CreateTransformerVC : UIViewController {
     var interactor:CreateTransformerInteractorLogic?
     func setup() {
         let viewController = self
-        let interactor = CreateTranformerInteractor()
-        let presenter = CreateTranformerPresenter()
+        let interactor = CreateTransformerInteractor()
+        let presenter = CreateTransformerPresenter()
         viewController.interactor = interactor
         interactor.presenter = presenter
         presenter.view = viewController
     }
 
-}
-protocol CreateTransformerInteractorLogic {
-    func createTransformer(_ request:CreateTransformerModel.Create.NewTransformer) -> Transformer?
-}
-
-class CreateTranformerInteractor : CreateTransformerInteractorLogic{
-
-    var presenter:CreateTranformerPresenterLogic? = nil
-    func createTransformer(_ request: CreateTransformerModel.Create.NewTransformer) -> Transformer? {
-        FireBase.createTransformer(request.name, team: request.team, properties: request.properties) { jsonString in
-            print(jsonString)
-        }
-        FireBase.createTransformer(request.name, team: request.team, properties: request.properties) { jsonString in
-            print(jsonString)
-        }
-        return nil
-    }
-    
-    
-}
-protocol CreateTranformerPresenterLogic {
-    func confirmTransformerCreated(_ name:String)
-}
-class CreateTranformerPresenter : CreateTranformerPresenterLogic{
-    var view:CreateTranformerDisplay? = nil
-    func confirmTransformerCreated(_ name:String) {
-        view?.showConfirmationCreated(name)
-    }
 }
 
 extension CreateTransformerVC : UITableViewDelegate, UITableViewDataSource {
@@ -137,6 +159,7 @@ extension CreateTransformerVC : UITableViewDelegate, UITableViewDataSource {
 }
 
 
+
 class SliderCell : UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
@@ -153,22 +176,22 @@ class SliderCell : UITableViewCell {
         slider.maximumValue = 10
         slider.addTarget(self, action: #selector(changedSlider), for: UIControl.Event.valueChanged)
         slider.addTarget(self, action: #selector(releasedSlider), for: UIControl.Event.touchUpInside)
-        slider.setValue(Float(value), animated: false)
+        slider.setValue(setSliderLabel(Float(value)), animated: false)
     }
     
     @objc func changedSlider() {
-        _ = setSliderLabel(slider.value)
+        slider.setValue(setSliderLabel(slider.value), animated: true)
     }
 
     @objc func releasedSlider() {
-        slider.setValue(Float(setSliderLabel(slider.value)), animated: true)
+        slider.setValue(setSliderLabel(slider.value), animated: true)
     }
 
-    func setSliderLabel(_ value:Float) -> Int {
-        let sliderValue = lroundf(slider.value)
-        sliderLabel.text = "\(Int(sliderValue))"
-        sendValue?(sliderValue)
-        return sliderValue
+    func setSliderLabel(_ value:Float) -> Float {
+        let sliderIntValue = lroundf(value)
+        sliderLabel.text = "\(sliderIntValue)"
+        sendValue?(sliderIntValue)
+        return value
     }
 
 }

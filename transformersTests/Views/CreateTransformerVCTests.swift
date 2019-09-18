@@ -7,7 +7,7 @@
 //
 
 import XCTest
-//import SnapshotTesting
+import SnapshotTesting
 
 @testable import transformers
 
@@ -41,21 +41,43 @@ class CreateTransformerTestsVC: XCTestCase {
     }
 
     func testViewStart() {
-        
         loadView()
-        if let first = sut.transformerProperties.first {
-            XCTAssert(first.rawValue == TransformerProperty.init(rawValue:TransformerProperties[0])!.rawValue, "Failed to find the first transformer value")
-        } else { XCTFail("Found no tranformers in view")}
-        for (idx, eachProperty) in sut.transformerProperties.enumerated() {
-                XCTAssert(eachProperty.rawValue == TransformerProperties[idx], "Failed to find all expected values")
+        
+        for eachProperty in TransformerProperties {
+                XCTAssert(sut.transformerProperties[eachProperty] == 5, "Failed to find all default values")
         }
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCTAssert(sut.createButton.isEnabled == true, "Create button wasn't enabled")
+        let spy = spyCreateTransformerInteractor()
+        sut.interactor = spy
+        let spyName = "MegaTest"
+        let teamSelection = 1
+        sut.name.text = spyName
+        sut.typeSelection.selectedSegmentIndex = teamSelection
+        sut.create(sut.createButton)    // Mock user pressing button
+        XCTAssert(spy.didSelectCreateTransformer == true, "CreateVC did not call the interactor when Create button pressed")
+        XCTAssert(spy.name == spyName, "Created Name wasn't passed in the request to Create?")
+        XCTAssert(spy.team == Team(rawValue: teamSelection == 0 ? "A" : "D")!.rawValue, "Created Name wasn't passed in the request to Create?")
     }
     
-    func testLayout() {
+    func testInitialDesignLayout() {
         loadView()
-//        assertSnapshot(matching: sut, as: .image(on: .iPhone8))
+        record = false
+        assertSnapshot(matching: sut, as: .image(on: .iPhone8))
     }
 
+}
+
+class spyCreateTransformerInteractor: CreateTransformerInteractorLogic {
+    var didSelectCreateTransformer = false
+    var name:String? = nil
+    var team:String? = nil
+    var properties:[String:Int]? = nil
+    
+    func createTransformer(_ request: CreateTransformerModel.Create.NewTransformer) {
+        didSelectCreateTransformer = true
+        self.name = request.name
+        self.team = request.team
+        self.properties = request.properties
+
+    }
 }

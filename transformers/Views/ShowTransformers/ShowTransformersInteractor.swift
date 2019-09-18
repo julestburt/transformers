@@ -1,5 +1,5 @@
 //
-//  ShowTransformerInteractor.swift
+//  ShowTransformersInteractor.swift
 //  transformers
 //
 //  Created by Jules Burt on 2019-09-16.
@@ -8,23 +8,32 @@
 
 import Foundation
 
-protocol ShowTransformerLogic {
+protocol ShowTransformersLogic {
     func getTransformers()
 }
 
-class ShowTransformerInteractor : ShowTransformerLogic{
+class ShowTransformersInteractor : ShowTransformersLogic {
     
-    var presenter:ShowTransformerPresenterLogic? = nil
+    var presenter:ShowTransformersPresenterLogic? = nil
     
     func getTransformers() {
         //        Current.service call?
-        let transformerModels = Transformers.current.DB
-        let presentTransformers = transformerModels
+        let currentTransformers = Transformers.current.DB
+        let presentTransformers = currentTransformers
             .map {(id, transformer) in
                 ShowTransformer.Present.List.Transformer(ID: transformer.id, name: transformer.name
                 , teamName: transformer.team.rawValue)}
         
-        presenter?.showTransformerList(ShowTransformer.Present.List(transformers: presentTransformers))
+        presenter?.showTransformersList(ShowTransformer.Present.List(transformers: presentTransformers))
+        
+        Transformers.current.subscribeToUpdates { (transformers) in
+            let presentTransformers = transformers
+                .map { transformer in
+                    ShowTransformer.Present.List.Transformer(ID: transformer.id, name: transformer.name
+                        , teamName: transformer.team.rawValue, imageURL: transformer.team_icon, rating: transformer.overall_rating)}
+            self.presenter?.showTransformersList(ShowTransformer.Present.List(transformers: presentTransformers))
+        }
     }
 }
+
 

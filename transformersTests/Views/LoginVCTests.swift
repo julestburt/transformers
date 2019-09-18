@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SnapshotTesting
 
 @testable import transformers
 
@@ -38,20 +39,22 @@ class LoginVCTests: XCTestCase {
     }
     
     func testLoginStart() {
-        
         loadView()
-        
-        XCTAssert(sut.interactor != nil, "VC needs the interactor setup")
-        sut.interactor?.getSpark()
+        XCTAssert(sut.interactor != nil, "View failed to setup the interacto")
         let interactorSpy = LoginInteractorSpy()
         sut.interactor = interactorSpy
         sut.getSpark(UIButton())
         XCTAssert(interactorSpy.getSParkCalled == true, "Pressing get AllSpark did not call the interactor method?")
     }
     
+    func testLoginCreateShowTransformersView() {
+        loadView()
+        XCTAssert(sut.transformers.restorationIdentifier! == "ShowTransformers", "did not get expected next View Controller")
+    }
+    
     func testLayout() {
         loadView()
-        //        assertSnapshot(matching: sut, as: .image(on: .iPhone8))
+        assertSnapshot(matching: sut, as: .image(on: .iPhone8))
     }
 }
 
@@ -60,6 +63,4 @@ class LoginInteractorSpy : LoginInteractorLogic {
     func getSpark() {
         getSParkCalled = true
     }
-    
-    
 }

@@ -3,16 +3,76 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "CreateTranformerInteractor.createTransformer(_:):CreateTransformerVC.swift">
+         contextName = "closure #1 in Transformers.addCreatedTransformer(_:):Transformer.swift">
       </ContextState>
       <ContextState
-         contextName = "CreateTransformerVC.create(_:):CreateTransformerVC.swift">
+         contextName = "EnvironmentTests.testEnvironment():EnvironmentTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Current">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "API.requestWithRetries(ID:url:params:maxRetry:type:completion:):APIService.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in API.requestWithRetries(ID:url:params:maxRetry:type:completion:):APIService.swift">
       </ContextState>
       <ContextState
+         contextName = "Transformers.addCreatedTransformer(_:):Transformer.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CreateTransformerVC.create(_:):CreateTransformerVC.swift">
+      </ContextState>
+      <ContextState
          contextName = "API.requestWithRetries(ID:url:maxRetry:type:completion:):APIService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LoginInteractor.getSpark():LoginInteractor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Current.apiService">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CreateTranformerInteractor.createTransformer(_:):CreateTransformerVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in LoginInteractor.getSpark():LoginInteractor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Current.user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CreateTransformerInteractor.createTransformer(_:):CreateTranformerInteractor.swift">
+      </ContextState>
+      <ContextState
+         contextName = "API.request(url:type:params:completion:):APIService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "&quot;\(serviceURL)\(url)&quot;">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginInteractorTests.testLoginAttempt():LoginInteractorTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Current.apiService">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginInteractorTests.setup():LoginInteractorTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Current">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "FakeSplashVC.viewDidAppear(_:):FakeSplashVC.swift">
@@ -23,13 +83,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "API.requestWithRetries(ID:url:params:maxRetry:type:completion:):APIService.swift">
+         contextName = "LoginPresenterSpy.confirmLogin(_:error:):LoginInteractorTests.swift">
       </ContextState>
       <ContextState
-         contextName = "API.request(url:type:params:completion:):APIService.swift">
+         contextName = "closure #1 in MockAPI.getAllSpark():FireBase.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EnvironmentTests.testExample():EnvironmentTests.swift">
          <PersistentStrings>
             <PersistentString
-               value = "&quot;\(serviceURL)\(url)&quot;">
+               value = "Current">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

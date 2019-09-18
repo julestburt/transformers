@@ -7,27 +7,54 @@
 //
 
 import XCTest
+import SnapshotTesting
+
+@testable import transformers
 
 class LoginPresenterTests: XCTestCase {
-
+    
+    var sut:LoginPresenter!
+    var spy:LoginViewSpy!
+    var window :UIWindow!
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        window = UIWindow()
+        setup()
     }
-
+    
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        window = nil
+        super.tearDown()
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func setup() {
+        spy = LoginViewSpy()
+        sut = LoginPresenter()
+        sut.view = spy
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testLoginPresentSuccess() {
+        sut.confirmLogin(true, error: nil)
+        XCTAssert(spy.didLoginConfirm == true, "presenter did not Confirm Login")
+        sut.confirmLogin(false, error: "problem logging in")
+        XCTAssert(spy.didLoginFail, "presenter did not Fail login")
+        
+        XCTAssert(spy.message ?? "" == "problem logging in", "presenter did not get message")
     }
+    
+}
 
+class LoginViewSpy : LoginDisplay {
+    var didLoginConfirm = false
+    func didLogin() {
+        didLoginConfirm = true
+    }
+    
+    var didLoginFail = false
+    var message:String? = nil
+    func failedLogin(_ msg: String) {
+        message = msg
+        didLoginFail = true
+    }
 }

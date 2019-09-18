@@ -8,43 +8,18 @@
 
 import Foundation
 
+//------------------------------------------------------------------------------
+// MARK: Dependency injected  Global App State
+//      Allowing for mocks of API, user access etc.
+//      Also can help manage/test with access to Date, random etc
+//------------------------------------------------------------------------------
 var Current = Environment()
 
 struct Environment {
     var user:User? = {
         User.existing()
     }()
-    var apiService:APIProtocol? = MockBase()// FireBase()
+    var apiService:APIProtocol? = FireBase()   // MockAPI()
     var editTransformer:String? = nil
-}
-
-struct User {
-    
-    #if DEBUG
-    static var createTestUser:User {
-        return User.init("XXX TEST USER")
-    }
-
-    static func clearStoredUser() {
-        UserDefaults.standard.removeObject(forKey: defaults.userToken)
-    }
-    #endif
-
-    static var token:String? {
-        return UserDefaults.standard.string(forKey: defaults.userToken)
-    }
-    
-    static func existing() -> User? {
-        guard let token = User.token else { return nil }
-        return User(token)
-    }
-    var exists:Bool {
-        return User.token != nil
-    }
-    
-    init(_ token:String) {
-        UserDefaults.standard.set(token, forKey: defaults.userToken)
-        // restore other user content here
-    }
 }
 

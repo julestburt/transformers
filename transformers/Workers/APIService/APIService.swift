@@ -13,18 +13,29 @@ import Alamofire
 //------------------------------------------------------------------------------
 // MARK: Firebase Service
 //------------------------------------------------------------------------------
-
 let serviceURL = "https://transformers-api.firebaseapp.com"
 
 protocol APIService {
     func request(url:String, type:HTTPMethod, params:[String:Any]?, completion:@escaping jsonCompletion)
 }
 
+extension API : APIService {
+    func request(url:String, type:HTTPMethod, params:[String:Any]? = nil, completion:@escaping jsonCompletion) {
+        guard let URL = URL(string: "\(serviceURL)\(url)")
+            else { completion(.Error((error:"invalidIURL", code:-99, message:"request couldn't be started")))
+                return }
+        let newID = UUID.init().uuidString
+        return requestWithRetries(ID: newID, url: URL, params:params, type:type, completion:completion)
+    }
+}
+
+//------------------------------------------------------------------------------
+// MARK: Requests
+//------------------------------------------------------------------------------
 protocol APIResponse {
     func didReceive(tag:String, result: JSON)
     func didFail(tag:String, error:String, code:Int?)
 }
-
 
 typealias jsonCompletion = ((APIDataResult<NSData>)->())
 enum APIDataResult<T> {
@@ -32,8 +43,7 @@ enum APIDataResult<T> {
     case Error((error:String, code:Int, message:String))
 }
 
-class API : NSObject, APIService {
-    
+class API : NSObject {
     private static var _instance: API?
     
     class var service:API {
@@ -59,31 +69,23 @@ class API : NSObject, APIService {
         alamoFire = Alamofire.SessionManager(configuration: sessionConfig)
     }
     
-    func request(url:String, type:HTTPMethod, params:[String:Any]? = nil, completion:@escaping jsonCompletion) {
-        guard let URL = URL(string: "\(serviceURL)\(url)")
-            else { completion(.Error((error:"invalidIURL", code:-99, message:"request couldn't be started")))
-                return }
-        let newID = UUID.init().uuidString
-        return requestWithRetries(ID: newID, url: URL, params:params, type:type, completion:completion)
-    }
-    
     private func requestWithRetries(ID:String, url:URL, params:[String:Any]?, maxRetry:Int = 3,  type:HTTPMethod, completion:@escaping jsonCompletion) {
         guard let _ = User.token else {
-            requestToken(ID, url, maxRetry, type, completion)
+            requestUnauthorized(ID, url, maxRetry, type, completion)
             return
         }
-        requestWithAuthToken(ID, url, params, maxRetry, type, completion)
+        requestAuthorized(ID, url, params, maxRetry, type, completion)
     }
     
-    fileprivate func requestToken(_ ID: String, _ url: URL, _ maxRetry:Int, _ type:HTTPMethod, _ completion:@escaping jsonCompletion) {
+    fileprivate func requestUnauthorized(_ ID: String, _ url: URL, _ maxRetry:Int, _ type:HTTPMethod, _ completion:@escaping jsonCompletion) {
         var headers:[String:String]? = [:]
         headers?["Content-Type"] = "application/json"
-        let tokenRequest = alamoFire.request(url, method: type, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+        let alamoRequest = alamoFire.request(url, method: type, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success(_):
-                if let string = response.result.value {
+                if let token = response.result.value {
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-                        let result = JSON("{ \"token\" : '\(string)\"")
+                        let result: JSON =  ["token":"Bearer \(token)"]
                         self.saveDebugData(result.description, fileName: ID)
                         self.didReceive(ID: ID, result: result)                    }
                 }
@@ -92,13 +94,13 @@ class API : NSObject, APIService {
             }
             
         }
-        addToRequestQueue(tokenRequest, ID, url, nil, headers, maxRetry, type, completion)
+        addToRequestQueue(alamoRequest, ID, url, nil, headers, maxRetry, type, completion)
     }
     
-    fileprivate func requestWithAuthToken(_ ID:String, _ url:URL, _ params:[String:Any]?, _ maxRetry:Int = 3, _ type:HTTPMethod, _ completion:@escaping jsonCompletion) {
+    fileprivate func requestAuthorized(_ ID:String, _ url:URL, _ params:[String:Any]?, _ maxRetry:Int = 3, _ type:HTTPMethod, _ completion:@escaping jsonCompletion) {
         var headers:[String:String]? = [:]
         headers?["Content-Type"] = "application/json"
-        headers?["Authorization"] = User.token != nil ? "Bearer <\(User.token!)>" : nil
+        headers?["Authorization"] = User.token != nil ? "Bearer \(User.token!)" : nil// "Bearer <\(User.token!)>" : nil
         let alamoRequest = alamoFire.request(url.description, method: type, parameters: params, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -111,7 +113,7 @@ class API : NSObject, APIService {
                 }
             case .failure(let error):
                 let (errorMsg, code) = self.handleError(error)
-                self.didFail(ID: ID, error: error.localizedDescription, code: -97)
+                self.didFail(ID: ID, error: errorMsg, code: code)
             }
         }
         addToRequestQueue(alamoRequest, ID, url, params, headers, maxRetry, type, completion)
@@ -154,33 +156,9 @@ class API : NSObject, APIService {
         return (errorMessage, errorCode)
     }
     
-    
-    fileprivate func addToRequestQueue(_ alamoRequest: DataRequest, _ ID: String, _ url: URL, _ params: [String : Any]?, _ headers: [String : String]?, _ maxRetry: Int, _ type:HTTPMethod, _ completion: @escaping jsonCompletion) {
-        print("request body: \(alamoRequest.debugDescription)")
-        let request = APIRequest(ID:ID, url:url, method:type, parameters: params, headers: headers, retryCount:maxRetry, request: alamoRequest, completion:completion)
-        addRequest(request)
-    }
-    
-    
-    private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-    func saveDebugData(_ sourceString:String, fileName:String) {
-        
-        #if DEBUG
-        let fileNamePath = documentsPath.appendingPathComponent(fileName+".txt")
-        do {
-            
-            try sourceString.write(toFile: fileNamePath, atomically: true, encoding: String.Encoding.utf8)
-        } catch let error as NSError {
-            print("error saving file \(fileNamePath)")
-            print(error.localizedDescription)
-        }
-        #endif
-    }
-    
     //------------------------------------------------------------------------------
     // MARK: Responses
     //------------------------------------------------------------------------------
-    
     func didReceive(ID: String, result: JSON) {
         if let request = getRequest(ID) {
             request.completion(.Success(data: result))
@@ -206,10 +184,16 @@ class API : NSObject, APIService {
             print("API didFail missing request")
         }
     }
+
+    //------------------------------------------------------------------------------
+    // MARK: Request Queue
+    //------------------------------------------------------------------------------
+    fileprivate func addToRequestQueue(_ alamoRequest: DataRequest, _ ID: String, _ url: URL, _ params: [String : Any]?, _ headers: [String : String]?, _ maxRetry: Int, _ type:HTTPMethod, _ completion: @escaping jsonCompletion) {
+        print("request body: \(alamoRequest.debugDescription)")
+        let request = APIRequest(ID:ID, url:url, method:type, parameters: params, headers: headers, retryCount:maxRetry, request: alamoRequest, completion:completion)
+        addRequest(request)
+    }
     
-    //------------------------------------------------------------------------------
-    // MARK: API Request queue
-    //------------------------------------------------------------------------------
     let safeSerialQueue = DispatchQueue(label: "SerialQueueSafety", qos: DispatchQoS.utility, attributes: DispatchQueue.Attributes.concurrent)
     var _currentQueue:[String:APIRequest] = [:]
     
@@ -256,4 +240,21 @@ class API : NSObject, APIService {
         }
     }
     
+    //------------------------------------------------------------------------------
+    // MARK: API Response Store
+    //------------------------------------------------------------------------------
+    private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+    func saveDebugData(_ sourceString:String, fileName:String) {
+        #if DEBUG
+        let fileNamePath = documentsPath.appendingPathComponent(fileName+".txt")
+        do {
+            
+            try sourceString.write(toFile: fileNamePath, atomically: true, encoding: String.Encoding.utf8)
+        } catch let error as NSError {
+            print("error saving file \(fileNamePath)")
+            print(error.localizedDescription)
+        }
+        #endif
+    }
 }
+

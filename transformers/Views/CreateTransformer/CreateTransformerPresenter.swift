@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+//------------------------------------------------------------------------------
+// MARK: Create Transformer Presenter Logic
+//------------------------------------------------------------------------------
+
+protocol CreateTransformerPresenterLogic {
+    func confirmTransformerCreated(_ transformer:CreateTransformerModel.Created.CreatedTransformer)
+}
+
+class CreateTransformerPresenter : CreateTransformerPresenterLogic {
+    var view:CreateTransformerDisplay? = nil
+    
+    func confirmTransformerCreated(_ transformer:CreateTransformerModel.Created.CreatedTransformer) {
+        view?.showConfirmationCreated(transformer)
+    }
+}
+

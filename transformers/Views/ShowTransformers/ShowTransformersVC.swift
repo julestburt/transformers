@@ -11,7 +11,6 @@ import UIKit
 //------------------------------------------------------------------------------
 // MARK: View Display
 //------------------------------------------------------------------------------
-
 protocol ShowTransformersDisplay {
     func showTransformers(_ transformerList:[ShowTransformer.Display.Transformer])
 }
@@ -19,12 +18,20 @@ protocol ShowTransformersDisplay {
 extension ShowTransformersVC : ShowTransformersDisplay {
     func showTransformers(_ transformerList: [ShowTransformer.Display.Transformer]) {
         transformers = transformerList
-        table.reloadData()
+        
+        guard let count = transformers?.count, count > 0 else {
+            return }
+        //spinner off here
+        DispatchQueue.main.async {
+        self.table.reloadData()
+        }
     }
     
     func createTransformer() {
         present(UIViewController.named("CreateTransformer"), animated: true) {
-            self.interactor?.getTransformers()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
+                self.interactor?.getTransformers()
+            })
         }
     }
 }
@@ -36,16 +43,19 @@ class ShowTransformersVC : UIViewController {
     @IBOutlet weak var table: UITableView!
     var transformers:[ShowTransformer.Display.Transformer]? = nil
     
-    
-    override func viewDidLoad() {
-        table.dataSource = self
-        table.delegate = self
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         interactor?.getTransformers()
     }
-    
+
     //------------------------------------------------------------------------------
     // MARK: View Setup
     //------------------------------------------------------------------------------
+    override func viewDidLoad() {
+        table.dataSource = self
+        table.delegate = self
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
@@ -56,11 +66,11 @@ class ShowTransformersVC : UIViewController {
         setup()
     }
     
-    var interactor:ShowTransformerLogic? = nil
+    var interactor:ShowTransformersLogic? = nil
     func setup() {
         let viewController = self
-        let interactor = ShowTransformerInteractor()
-        let presenter = ShowTransformerPresenter()
+        let interactor = ShowTransformersInteractor()
+        let presenter = ShowTransformersPresenter()
         viewController.interactor = interactor
         interactor.presenter = presenter
         presenter.view = viewController
@@ -83,15 +93,17 @@ extension ShowTransformersVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let count = transformers?.count, count > 0, let transformer = transformers?[indexPath.row],
-            let cell = table.dequeueReusableCell(withIdentifier: "\(transformer.teamName)Cell")
-            else { let emptyCell =  table.dequeueReusableCell(withIdentifier: "EmptyCell")
+            let cell = table.dequeueReusableCell(withIdentifier: "TransformerCell") as? TransformerCell
+            else { let emptyCell =  table.dequeueReusableCell(withIdentifier: "EmptyCell" )
                 as! EmptyCell
+                emptyCell.creating = false
                 emptyCell.delegate = {
                     self.createTransformer()
                 }
                 return emptyCell
         }
-        
+        print(transformer.teamName)
+        cell.setup(transformer.name, image: transformer.imageURL, rating: transformer.rating)
         //        cell.setup()
         return cell
     }
@@ -99,62 +111,16 @@ extension ShowTransformersVC : UITableViewDelegate, UITableViewDataSource {
     
 }
 
-enum ShowTransformer {
-    enum Display {
-        struct Transformer {
-            let name:String
-            let teamName:String
-        }
-    }
-    enum Present {
-        struct TransformerList {
-            struct PresentTransformerInfo{
-                let name:String
-                let teamName:String
-            }
-            let transformers:[PresentTransformerInfo]
-        }
-    }
-}
-
-protocol ShowTransformerLogic {
-    func getTransformers()
-}
-
-class ShowTransformerInteractor : ShowTransformerLogic{
-    
-    var presenter:ShowTransformerPresenterLogic? = nil
-    
-    func getTransformers() {
-//        Current.service
-        let transformerModels = Transformers.shared.transformers
-        let presentTransformers = transformerModels
-            .map { ShowTransformer.Present.TransformerList.PresentTransformerInfo(name: $0.name
-                , teamName: $0.team.rawValue)}
-        
-        presenter?.showTransformerList(ShowTransformer.Present.TransformerList(transformers: presentTransformers))
-    }
-}
-
-protocol ShowTransformerPresenterLogic {
-    func showTransformerList(_ list:ShowTransformer.Present.TransformerList)
-}
-
-class ShowTransformerPresenter : ShowTransformerPresenterLogic {
-    var view:ShowTransformersDisplay? = nil
-    func showTransformerList(_ list: ShowTransformer.Present.TransformerList) {
-        let transformers = list.transformers.map { ShowTransformer.Display.Transformer(name: $0.name, teamName: $0.teamName)}
-        view?.showTransformers(transformers)
-    }
-}
-
+//------------------------------------------------------------------------------
+// MARK: UITableViewCells
+//------------------------------------------------------------------------------
 class TransformerCell : UITableViewCell {
     
     @IBOutlet weak var imageContainer: UIView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var rating: UILabel!
     
-    func setup(_ name:String, image:UIImage, rating:Int) {
+    func setup(_ name:String, image:String, rating:String) {
         let imageView = UIImageView(frame: imageContainer.bounds)
         imageView.image = image
         imageContainer.addSubview(imageView)
@@ -164,10 +130,8 @@ class TransformerCell : UITableViewCell {
 }
 
 class EmptyCell : UITableViewCell {
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -175,8 +139,9 @@ class EmptyCell : UITableViewCell {
     }
     
     @IBOutlet weak var createButton: UIButton!
+    var creating = false
     @IBAction func createTransformer(_ sender: Any) {
-        createButton.isEnabled = false
+        guard !creating else { return }
         delegate?()
     }
 

@@ -7,3 +7,27 @@
 //
 
 import Foundation
+
+enum ShowTransformer {
+    enum Display {
+        struct Transformer {
+            let ID:String
+            let name:String
+            let teamName:String
+            let imageURL:String
+            let rating:String
+        }
+    }
+    enum Present {
+        struct List {
+            struct Transformer {
+                let ID:String
+                let name:String
+                let teamName:String
+                let imageURL:String
+                let rating:Int
+            }
+            let transformers:[Transformer]
+        }
+    }
+}

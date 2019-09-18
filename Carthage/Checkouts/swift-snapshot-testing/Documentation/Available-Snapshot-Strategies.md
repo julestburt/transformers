@@ -39,6 +39,7 @@ If you'd like to submit your own custom strategy, see [Contributing](../CONTRIBU
       - [`.image`](#image-8)
       - [`.recursiveDescription`](#recursivedescription-3)
   - [`URLRequest`](#urlrequest)
+      - [`.curl`](#curl)
       - [`.raw`](#raw)
 
 ## Any
@@ -233,7 +234,7 @@ Records:
 
 A snapshot strategy for comparing images based on pixel equality.
 
-**Format:** `UIImage`
+**Format:** `NSImage`
 
 #### Parameters:
 
@@ -275,10 +276,6 @@ A snapshot strategy for comparing layers based on pixel equality.
 
     A view size override.
     
-  - `traits: UITraitCollection = .init()`
-
-    A trait collection override.
-
 #### Example:
 
 ``` swift
@@ -292,12 +289,6 @@ assertSnapshot(matching: view, as: .image(precision: 0.99))
 assertSnapshot(
   matching: view,
   as: .image(size: .init(width: 44, height: 44))
-)
-
-// Render with a horizontally-compact size class.
-assertSnapshot(
-  matching: view,
-  as: .image(traits: .init(horizontalSizeClass: .regular))
 )
 ```
 
@@ -708,6 +699,28 @@ Records:
 ## URLRequest
 
 **Platforms:** All
+
+### `.curl`
+
+A snapshot strategy for comparing requests based on a cURL representation.
+
+**Format:** `String`
+
+#### Example:
+
+``` swift
+assertSnapshot(matching: request, as: .curl)
+```
+
+Records:
+
+```
+curl \
+	--request POST \
+	--header "Accept: text/html" \
+	--data 'pricing[billing]=monthly&pricing[lane]=individual' \
+	"https://www.pointfree.co/subscribe"
+```
 
 ### `.raw`
 

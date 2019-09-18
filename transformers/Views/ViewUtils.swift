@@ -8,22 +8,13 @@
 
 import UIKit
 
-func randomLightUIColor()->UIColor{
-    return UIColor.randomLight()
-}
-extension UIColor {
-    public static func randomLight() -> UIColor {
-        let red:CGFloat = CGFloat((arc4random_uniform(127) + 128)) / 255.0
-        let green:CGFloat = CGFloat((arc4random_uniform(127) + 128)) / 255.0
-        let blue:CGFloat = CGFloat((arc4random_uniform(127) + 128)) / 255.0
-        return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-    }
-}
-
+//------------------------------------------------------------------------------
+// MARK: Some UIView utility helpers
+//------------------------------------------------------------------------------
 extension UIViewController {
     func show(_ nextViewController:UIViewController) {
         
-        // Slight delay to avoid a black flash, particularly on older iOS9 devices
+        // Small delay avoids a black flash, particularly on older iOS9 devices
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
             if let window = UIApplication.shared.delegate?.window, let w = window {
                 
@@ -43,8 +34,8 @@ extension UIViewController {
                 w.addSubview(coverUpFakeShot)
                 
                 nextViewController.present(fakeCover, animated: false) {
+                    // now dismiss fakeCover to reveal nextViewController
                     coverUpFakeShot.removeFromSuperview()
-                    // dismiss realFakeView to reveal nextViewController
                 }
             }
         }

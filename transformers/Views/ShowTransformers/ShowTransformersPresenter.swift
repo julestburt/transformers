@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+protocol ShowTransformersPresenterLogic {
+    func showTransformersList(_ list:ShowTransformer.Present.List)
+}
+
+class ShowTransformersPresenter : ShowTransformersPresenterLogic {
+    var view:ShowTransformersDisplay? = nil
+    func showTransformersList(_ list: ShowTransformer.Present.List) {
+        let transformers = list.transformers.map { ShowTransformer.Display.Transformer(ID: $0.ID, name: $0.name, teamName: $0.teamName, imageURL: $0.imageURL, rating: String($0.rating))}
+        view?.showTransformers(transformers)
+    }
+}
