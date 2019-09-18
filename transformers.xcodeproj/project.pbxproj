@@ -47,6 +47,8 @@
 		84F02DCF2332105700169395 /* MockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DCE2332105700169395 /* MockAPI.swift */; };
 		84F02DD1233234EC00169395 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 84F02DD0233234EB00169395 /* Cartfile */; };
 		84F02DD3233235CB00169395 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 84F02DD2233235CA00169395 /* README.md */; };
+		84F02DD523323FA500169395 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F02DD423323FA500169395 /* Kingfisher.framework */; };
+		84F02DD72332661100169395 /* TransformerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DD62332661100169395 /* TransformerDB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,8 @@
 		84F02DCE2332105700169395 /* MockAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPI.swift; sourceTree = "<group>"; };
 		84F02DD0233234EB00169395 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		84F02DD2233235CA00169395 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		84F02DD423323FA500169395 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		84F02DD62332661100169395 /* TransformerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerDB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F02DD523323FA500169395 /* Kingfisher.framework in Frameworks */,
 				84B81D432325B0D500260CCD /* Alamofire.framework in Frameworks */,
 				84B81D442325B0D500260CCD /* SwiftyJSON.framework in Frameworks */,
 				840FE9E3232BFB45009898DC /* then.framework in Frameworks */,
@@ -228,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				84882F962326E782008D15E2 /* Transformer.swift */,
+				84F02DD62332661100169395 /* TransformerDB.swift */,
 				84F02DC92331D00200169395 /* BattleLogic.swift */,
 			);
 			path = Models;
@@ -236,6 +242,7 @@
 		84B81D402325B0D500260CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84F02DD423323FA500169395 /* Kingfisher.framework */,
 				840FE9E2232BFB45009898DC /* then.framework */,
 				840FE9E0232BFB3C009898DC /* then.framework.dSYM */,
 				84E3DE312326D83A005E621A /* SnapshotTesting.framework */,
@@ -420,6 +427,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/then.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -428,6 +436,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/then.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -455,6 +464,7 @@
 				84E3DE272326A267005E621A /* ShowTransformersVC.swift in Sources */,
 				84A71E1A232C5B6000023B60 /* LoginInteractor.swift in Sources */,
 				84882F972326E782008D15E2 /* Transformer.swift in Sources */,
+				84F02DD72332661100169395 /* TransformerDB.swift in Sources */,
 				84882F9A2326FBF2008D15E2 /* Environment.swift in Sources */,
 				847C43502325A31C00E6BC32 /* AppDelegate.swift in Sources */,
 				84A71E22232EB24000023B60 /* CreateTransformerPresenter.swift in Sources */,

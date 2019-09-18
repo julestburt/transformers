@@ -16,22 +16,21 @@ class ShowTransformersInteractor : ShowTransformersLogic {
     
     var presenter:ShowTransformersPresenterLogic? = nil
     
+    fileprivate func createPresenterList(_ transformers: [Transformer]) -> [ShowTransformer.Present.List.Transformer] {
+        return transformers
+            .sorted { $0.overall_rating > $1.overall_rating }
+            .map { transformer in
+                ShowTransformer.Present.List.Transformer(ID: transformer.id, name: transformer.name
+                    , teamName: transformer.team.rawValue, imageURL: transformer.team_icon, rating: transformer.overall_rating)}
+    }
+    
     func getTransformers() {
         //        Current.service call?
-        let currentTransformers = Transformers.current.DB
-        let presentTransformers = currentTransformers
-            .map {(id, transformer) in
-                ShowTransformer.Present.List.Transformer(ID: transformer.id, name: transformer.name
-                , teamName: transformer.team.rawValue)}
-        
-        presenter?.showTransformersList(ShowTransformer.Present.List(transformers: presentTransformers))
+        let transformers = Transformers.current.DB.map { $1 }
+        presenter?.showTransformersList(ShowTransformer.Present.List(transformers: self.createPresenterList(transformers)))
         
         Transformers.current.subscribeToUpdates { (transformers) in
-            let presentTransformers = transformers
-                .map { transformer in
-                    ShowTransformer.Present.List.Transformer(ID: transformer.id, name: transformer.name
-                        , teamName: transformer.team.rawValue, imageURL: transformer.team_icon, rating: transformer.overall_rating)}
-            self.presenter?.showTransformersList(ShowTransformer.Present.List(transformers: presentTransformers))
+            self.presenter?.showTransformersList(ShowTransformer.Present.List(transformers: self.createPresenterList(transformers)))
         }
     }
 }

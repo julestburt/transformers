@@ -13,22 +13,33 @@ import UIKit
 //------------------------------------------------------------------------------
 protocol CreateTransformerDisplay {
     func showConfirmationCreated(_ transformerName:CreateTransformerModel.Created.CreatedTransformer)
+    func failedToCreate()
 }
 
 extension CreateTransformerVC :CreateTransformerDisplay {
     func showConfirmationCreated(_ transformer:CreateTransformerModel.Created.CreatedTransformer) {
+        
         let alertview = UIAlertController(title: "\(transformer.name) Created", message: "Success!! Get ready to fight...with 2 or more Transformers! Rating:\(transformer.rating)", preferredStyle: UIAlertController.Style.actionSheet)
         present(alertview, animated: true) {
-                self.dismiss(animated: true, completion: {
-                    self.closeCreateView()
-                })
+            self.dismiss(animated: true, completion: {
+                self.closeCreateView()
+            })
         }
     }
     
     func closeCreateView() {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             self.dismiss(animated: true, completion: nil)
-
+            
+        }
+    }
+    
+    func failedToCreate() {
+        let alertview = UIAlertController(title: "Failed to Create", message: "Something failed on our end!?", preferredStyle: UIAlertController.Style.actionSheet)
+        present(alertview, animated: true) {
+            self.dismiss(animated: true, completion: {
+                self.closeCreateView()
+            })
         }
     }
 }
@@ -36,13 +47,13 @@ extension CreateTransformerVC :CreateTransformerDisplay {
 //------------------------------------------------------------------------------
 // MARK: View Controller & Setup
 //------------------------------------------------------------------------------
-class CreateTransformerVC : UIViewController {
+class CreateTransformerVC : UIViewController , UIGestureRecognizerDelegate{
     var editExistingID:String? {
         return Current.editTransformer
     }
     // Creating a new Transformer sets this default property
     let DefaultValue = 5
-
+    
     // initial testsetup
     @IBOutlet weak var titleHeight: NSLayoutConstraint!
     @IBOutlet weak var typeSelection: UISegmentedControl!
@@ -80,7 +91,29 @@ class CreateTransformerVC : UIViewController {
         
     }
     
+    
+    var tap:UITapGestureRecognizer?
+    @objc fileprivate func handleTapGesture(sender: UITapGestureRecognizer) {
+        self.name.endEditing(true)
+    }
+    
+    func addTap() {
+        tap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(sender:)))
+        tap?.delegate = self
+        tap?.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap!)
+    }
+    
+    func removeTap() {
+        if let tap = tap {
+            view.removeGestureRecognizer(tap)
+            self.tap = nil
+        }
+    }
+    
+    
     func setupView () {
+        name.delegate = self
         setupTransformerInView()
         createButton.layer.cornerRadius = 5
         closeButton.layer.cornerRadius = closeButton.bounds.size.width / 2
@@ -107,12 +140,12 @@ class CreateTransformerVC : UIViewController {
         let request = CreateTransformerModel.Create.NewTransformer(name: name, team: typeSelection.selectedSegmentIndex == 0 ? Team.autobot.rawValue : Team.decepticon.rawValue, properties: transformerProperties)
         interactor?.createTransformer(request)
     }
-
-@objc func close() {
-    self.dismiss(animated: true)
-}
-
-
+    
+    @objc func close() {
+        self.dismiss(animated: true)
+    }
+    
+    
     
     //------------------------------------------------------------------------------
     // MARK: Setup
@@ -136,11 +169,12 @@ class CreateTransformerVC : UIViewController {
         interactor.presenter = presenter
         presenter.view = viewController
     }
-
+    
 }
 
 extension CreateTransformerVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        valuesTableHeight.constant = CGFloat(transformerProperties.count * 70 > 0 ? transformerProperties.count * 70 : 100)
         return transformerProperties.count
     }
     
@@ -158,12 +192,18 @@ extension CreateTransformerVC : UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension CreateTransformerVC : UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        addTap()
+    }
+
+}
 
 
 class SliderCell : UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
-
+    
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var sliderLabel: UILabel!
     var sendValue:((Int)->Void)? = nil
@@ -182,16 +222,16 @@ class SliderCell : UITableViewCell {
     @objc func changedSlider() {
         slider.setValue(setSliderLabel(slider.value), animated: true)
     }
-
+    
     @objc func releasedSlider() {
         slider.setValue(setSliderLabel(slider.value), animated: true)
     }
-
+    
     func setSliderLabel(_ value:Float) -> Float {
         let sliderIntValue = lroundf(value)
         sliderLabel.text = "\(sliderIntValue)"
         sendValue?(sliderIntValue)
         return value
     }
-
+    
 }

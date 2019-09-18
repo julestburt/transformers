@@ -85,8 +85,8 @@ class API : NSObject {
             case .success(_):
                 if let token = response.result.value {
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-                        let result: JSON =  ["token":"Bearer \(token)"]
-                        self.saveDebugData(result.description, fileName: ID)
+                        let result: JSON =  ["token":"\(token)"]
+                        self.saveDebugData(result.description, fileName: url.absoluteString)
                         self.didReceive(ID: ID, result: result)                    }
                 }
             case .failure(_):
@@ -105,6 +105,7 @@ class API : NSObject {
             switch response.result {
             case .success:
                 if let json = response.result.value {
+                    print(json)
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
                         let result = JSON(json)
                         self.saveDebugData(result.description, fileName: ID)

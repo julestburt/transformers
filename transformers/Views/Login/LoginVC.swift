@@ -64,7 +64,7 @@ class LoginVC : UIViewController{
 
     var transformers:UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: "ShowTransformers")
+        return storyboard.instantiateViewController(withIdentifier: "ShowTransformersNavigation")
     }
 
 }

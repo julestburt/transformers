@@ -30,6 +30,7 @@ protocol APIProtocol {
     func getAllSpark() -> Promise<String>
     func getTransformers() -> Promise<[Transformer]>
     func createTransformer(_ name:String, team:String, properties:[String:Int]) -> Promise<Transformer>
+    func changeTransformer(_ ID:String, name:String, team:String, properties:[String:Int]) -> Promise<Transformer>
     func delete(_ id:String) -> Promise<Bool>
 }
 
@@ -85,6 +86,33 @@ class FireBase : APIProtocol {
             API.service.request(url: endpoint.url, type: endpoint.type, params: params) { response in
                 switch response {
                 case .Success(let json):
+                    print(json.string ?? "---")
+                    if let transformer = Transformer(json.stringValue) {
+                        Transformers.current.addCreatedTransformer(transformer)
+                        success(transformer)
+                    }
+                    // Fall through case
+                    Transformers.current.refreshFromServer()
+                    fail(CustomError(title: "Failed to createTransformer", description: "couldn't extract from response data?", code: -97))
+                case .Error(let error):
+                    print(error.message)
+                }
+            }
+        }
+    }
+    
+    func changeTransformer(_ ID:String, name:String, team:String, properties:[String:Int]) -> Promise<Transformer> {
+        return Promise { success, fail in
+            let endpoint = Endpoints.postTransformer
+            var params = properties.reduce(into: [String:Any]()) { result, item in
+                result[item.key] = item.value
+            }
+            params["name"] = name
+            params["team"] = team
+            params["id"] = ID
+            API.service.request(url: endpoint.url, type: endpoint.type, params: params) { response in
+                switch response {
+                case .Success(let json):
                     if let transformer = Transformer(json.stringValue) {
                         Transformers.current.addCreatedTransformer(transformer)
                         success(transformer)
@@ -96,6 +124,8 @@ class FireBase : APIProtocol {
             }
         }
     }
+    
+
     
     func delete(_ id:String) -> Promise<Bool> {
         return Promise { success, fail in

@@ -54,6 +54,7 @@ class LoginVCTests: XCTestCase {
     
     func testLayout() {
         loadView()
+//        record = true
         assertSnapshot(matching: sut, as: .image(on: .iPhone8))
     }
 }

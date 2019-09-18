@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 //------------------------------------------------------------------------------
 // MARK: View Display
@@ -18,12 +19,15 @@ protocol ShowTransformersDisplay {
 extension ShowTransformersVC : ShowTransformersDisplay {
     func showTransformers(_ transformerList: [ShowTransformer.Display.Transformer]) {
         transformers = transformerList
-        
-        guard let count = transformers?.count, count > 0 else {
-            return }
         //spinner off here
         DispatchQueue.main.async {
-        self.table.reloadData()
+            guard let count = self.transformers?.count, count > 0 else {
+                self.navigationItem.rightBarButtonItem?.isEnabled = false
+                return }
+            if count >= 2 {
+                self.navigationItem.rightBarButtonItem?.isEnabled = false
+            }
+            self.table.reloadData()
         }
     }
     
@@ -54,6 +58,16 @@ class ShowTransformersVC : UIViewController {
     override func viewDidLoad() {
         table.dataSource = self
         table.delegate = self
+        navigationItem.title = "Transformers"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Battle", style: UIBarButtonItem.Style.plain, target: self, action: #selector(startBattle))
+        navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    
+    @objc func startBattle() {
+        present(UIViewController.named("BattleTransformers"), animated: true) {
+            print("Battling...")
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -83,7 +97,7 @@ class ShowTransformersVC : UIViewController {
 extension ShowTransformersVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = transformers?.count, count > 0 else { return 1 }
-        return count
+        return count + 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -92,7 +106,7 @@ extension ShowTransformersVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let count = transformers?.count, count > 0, let transformer = transformers?[indexPath.row],
+        guard let count = transformers?.count, count > 0 && indexPath.row != count, let transformer = transformers?[indexPath.row],
             let cell = table.dequeueReusableCell(withIdentifier: "TransformerCell") as? TransformerCell
             else { let emptyCell =  table.dequeueReusableCell(withIdentifier: "EmptyCell" )
                 as! EmptyCell
@@ -108,7 +122,20 @@ extension ShowTransformersVC : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let id = self.transformers?[indexPath.row].ID {
+                Current.apiService?.delete(id)
+                    .then { confirm in
+                        DispatchQueue.main.async {
+                            self.transformers?.remove(at: indexPath.row)
+                            tableView.deleteRows(at: [indexPath], with: .left)
+                        }
+                }
+                
+            }
+        }
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -122,7 +149,9 @@ class TransformerCell : UITableViewCell {
     
     func setup(_ name:String, image:String, rating:String) {
         let imageView = UIImageView(frame: imageContainer.bounds)
-        imageView.image = image
+        let url = URL(string: image)
+        _ = imageContainer.subviews.map { $0.removeFromSuperview() }
+        imageView.kf.setImage(with: url, options: [.transition(.fade(0.2)), .cacheOriginalImage])
         imageContainer.addSubview(imageView)
         self.name.text = name
         self.rating.text = "\(rating)"

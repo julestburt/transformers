@@ -61,7 +61,7 @@ class CreateTransformerTestsVC: XCTestCase {
     
     func testInitialDesignLayout() {
         loadView()
-        record = false
+//        record = true
         assertSnapshot(matching: sut, as: .image(on: .iPhone8))
     }
 

@@ -31,6 +31,7 @@ class CreateTransformerInteractor : CreateTransformerInteractorLogic {
             }
             .onError { error in
                 print(error.localizedDescription)
+                self.presenter?.failedToCreate()
         }
     }
 }

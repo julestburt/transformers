@@ -25,7 +25,7 @@ class FakeSplashVC: UIViewController {
     }
     
     var transformers:UIViewController {
-        return UIViewController.named("ShowTransformers")
+        return UIViewController.named("ShowTransformersNavigation")
     }
     
 }

@@ -28,7 +28,7 @@ class EnvironmentTests: XCTestCase {
     func testEnvironment() {
         XCTAssert(Current.apiService != nil, "Environment should come with the apiService setup")
 
-        XCTAssert(Current.user == nil, "Environment shouldn't contain a user( by default")
+        XCTAssert(Current.user == nil, "Environment shouldn't contain a user by default")
         XCTAssert(User.existing() == nil, "There should be no existing user without first creating one")
         XCTAssert(User.token == nil, "There should be no existing token without creating one")
         let createdUser = User.createTestUser

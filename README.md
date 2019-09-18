@@ -1,7 +1,7 @@
 # transformers
 Tech Test from a local Company
 
-This test took me approx 14 hours to complete over about a week+.
+This test took me approx 14 hours to complete this over about a week+
 
 It was more time than I was planning, but there was three big ask. API, App and Logic.
 
@@ -15,15 +15,22 @@ Class Docs:
 Environment - Current global structure of needed properties.
 User - Current User / auth token
 Transformer - Model data
+Transformers - Current / resident DB
 BattleLogic - Game to run the battle
 FakeSplash / FakeCover - Provided for initial routing and flow
 Note: All ViewControllers below have ViewController/Interactor/Presenter classes for testing
 LoginVC - Get the Allspark token!   (Testing example showing in LoginTests)
 ShowTransformers - List of current Transformers
 CreateTransformer - Create or Edit Transformers
-
+BattleTransoformers - Unfinished due to time - but was going to display the calculated results one after another....
+ViewUtils - Just some extensions
+FireBase - Your API
+API Service - URL Request class
+Utils - Handy stuff
 
 With a certain amount of dependency injection and utiliizing the latest snapshot testing tools, it's possible to have a very well tested app, including visual layouts, without having to rely on slower UITesting, which can often be distracting from the real issues.
+
+Whilst I fell short of the overall goals I do hope there is enough code in place to get a feel for my coding style and approach...just needed a little more debugging time!
 
 Thx and I look forward to hearing any feedback you have from my efforts...
 

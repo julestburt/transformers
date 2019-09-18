@@ -14,6 +14,7 @@ import Foundation
 
 protocol CreateTransformerPresenterLogic {
     func confirmTransformerCreated(_ transformer:CreateTransformerModel.Created.CreatedTransformer)
+    func failedToCreate()
 }
 
 class CreateTransformerPresenter : CreateTransformerPresenterLogic {
@@ -22,5 +23,10 @@ class CreateTransformerPresenter : CreateTransformerPresenterLogic {
     func confirmTransformerCreated(_ transformer:CreateTransformerModel.Created.CreatedTransformer) {
         view?.showConfirmationCreated(transformer)
     }
+    
+    func failedToCreate() {
+        view?.failedToCreate()
+    }
+
 }
 
