@@ -14,6 +14,8 @@ struct Environment {
     var user:User? = {
         User.existing()
     }()
+    var apiService:APIProtocol? = MockBase()// FireBase()
+    var editTransformer:String? = nil
 }
 
 struct User {
