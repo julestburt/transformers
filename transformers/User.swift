@@ -8,6 +8,9 @@
 
 import Foundation
 
+//------------------------------------------------------------------------------
+// MARK: Current user in environment. Token is stored away from the app logic
+//------------------------------------------------------------------------------
 struct User {
     
     #if DEBUG
@@ -25,17 +28,21 @@ struct User {
     }
     #endif
     
-    static var token:String? {
+    #if DEBUG
+        static var token:String? {
         return UserDefaults.standard.string(forKey: defaults.userToken)
     }
+    #else
+        private static var token:String? {
+        return UserDefaults.standard.string(forKey: defaults.userToken)
+    }
+    #endif
 
+    
     static func existing() -> User? {
         guard let token = User.token else { return nil }
         return User(token)
     }
-//    var exists:Bool {
-//        return User.token != nil
-//    }
     
     init(_ token:String) {
         UserDefaults.standard.set(token, forKey: defaults.userToken)

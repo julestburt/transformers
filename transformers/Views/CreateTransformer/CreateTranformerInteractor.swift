@@ -21,14 +21,27 @@ protocol CreateTransformerInteractorLogic {
 class CreateTransformerInteractor : CreateTransformerInteractorLogic {
     var presenter:CreateTransformerPresenterLogic? = nil
     
+    fileprivate func createChangeConfirm(_ transformer:Transformer) -> () {
+        Transformers.current.addCreatedTransformer(transformer)
+        let teamName = transformer.team == .autobot ? "autobot" : "decepticon"
+        let simpleTransformerModel = CreateTransformerModel.Created.CreatedTransformer(name: transformer.name, rating:transformer.rank, team: teamName, imageName: transformer.team_icon)
+        self.presenter?.confirmTransformerCreated(simpleTransformerModel)
+    }
+    
     func createTransformer(_ request: CreateTransformerModel.Create.NewTransformer) {
-        Current.apiService?.createTransformer(request.name, team: request.team, properties: request.properties)
-            .then { transformer in
-                Transformers.current.addCreatedTransformer(transformer)
-                let teamName = transformer.team == .autobot ? "autobot" : "decepticon"
-                let simpleTransformerModel = CreateTransformerModel.Created.CreatedTransformer(name: transformer.name, rating:transformer.rank, team: teamName, imageName: transformer.team_icon)
-                self.presenter?.confirmTransformerCreated(simpleTransformerModel)
+        
+        guard let id = request.id else {
+            Current.apiService?.createTransformer(request.name, team: request.team, properties: request.properties)
+                .then(createChangeConfirm)
+                .onError { error in
+                    print(error.localizedDescription)
+                    self.presenter?.failedToCreate()
             }
+            return
+        }
+        
+        Current.apiService?.changeTransformer(id, name: request.name, team: request.team, properties: request.properties)
+            .then(createChangeConfirm)
             .onError { error in
                 print(error.localizedDescription)
                 self.presenter?.failedToCreate()

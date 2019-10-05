@@ -18,12 +18,16 @@ protocol CreateTransformerDisplay {
 
 extension CreateTransformerVC :CreateTransformerDisplay {
     func showConfirmationCreated(_ transformer:CreateTransformerModel.Created.CreatedTransformer) {
-        
-        let alertview = UIAlertController(title: "\(transformer.name) Created", message: "Success!! Get ready to fight...with 2 or more Transformers! Rating:\(transformer.rating)", preferredStyle: UIAlertController.Style.actionSheet)
-        present(alertview, animated: true) {
-            self.dismiss(animated: true, completion: {
-                self.closeCreateView()
-            })
+        DispatchQueue.main.async {
+            
+            let alertview = UIAlertController(title: "\(transformer.name) Created", message: "Success!! Get ready to fight...with 2 or more Transformers! Rating:\(transformer.rating)", preferredStyle: UIAlertController.Style.actionSheet)
+            self.present(alertview, animated: true) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.dismiss(animated: true, completion: {
+                        self.closeCreateView()
+                    })
+                }
+            }
         }
     }
     
@@ -35,11 +39,11 @@ extension CreateTransformerVC :CreateTransformerDisplay {
     }
     
     func failedToCreate() {
-        let alertview = UIAlertController(title: "Failed to Create", message: "Something failed on our end!?", preferredStyle: UIAlertController.Style.actionSheet)
-        present(alertview, animated: true) {
-            self.dismiss(animated: true, completion: {
-                self.closeCreateView()
-            })
+        DispatchQueue.main.async {
+            let alertview = UIAlertController(title: "Failed to Create", message: "Something failed on our end!?", preferredStyle: UIAlertController.Style.actionSheet)
+            self.present(alertview, animated: true) {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
 }
@@ -56,6 +60,7 @@ class CreateTransformerVC : UIViewController , UIGestureRecognizerDelegate{
     
     // initial testsetup
     @IBOutlet weak var titleHeight: NSLayoutConstraint!
+    @IBOutlet weak var titleScreen: UILabel!
     @IBOutlet weak var typeSelection: UISegmentedControl!
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var valuesTable: UITableView!
@@ -86,9 +91,12 @@ class CreateTransformerVC : UIViewController , UIGestureRecognizerDelegate{
             "rank" : editableTransformer.rank,
             "courage" : editableTransformer.courage,
             "firepower" : editableTransformer.firepower,
-            "skill" : editableTransformer.skill
+            "skill" : editableTransformer.skill,
         ]
-        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        Current.editTransformer = nil
     }
     
     
@@ -114,10 +122,13 @@ class CreateTransformerVC : UIViewController , UIGestureRecognizerDelegate{
     
     func setupView () {
         name.delegate = self
+        titleScreen.text = editExistingID != nil ? "Update Transformer" : "Create Transformer"
         setupTransformerInView()
         createButton.layer.cornerRadius = 5
+        createButton.titleLabel?.text = editExistingID != nil ? "Update" : "Create"
         closeButton.layer.cornerRadius = closeButton.bounds.size.width / 2
         closeButton.addTarget(self, action: #selector(close), for: UIControl.Event.touchUpInside)
+        closeButton.isHidden = editExistingID != nil
         valuesTable.dataSource = self
         valuesTable.delegate = self
         valuesTable.reloadData()
@@ -129,7 +140,7 @@ class CreateTransformerVC : UIViewController , UIGestureRecognizerDelegate{
         guard let name = name.text, name != "" else {
             let alertview = UIAlertController(title: "Need a Name", message: "Create a Transformer with a name!", preferredStyle: UIAlertController.Style.actionSheet)
             alertview.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                self.dismiss(animated:true, completion: nil)
+                //                self.dismiss(animated:true, completion: nil)
             }))
             present(alertview, animated: true, completion: nil)
             return
@@ -137,15 +148,13 @@ class CreateTransformerVC : UIViewController , UIGestureRecognizerDelegate{
         
         creatingAlready = true
         
-        let request = CreateTransformerModel.Create.NewTransformer(name: name, team: typeSelection.selectedSegmentIndex == 0 ? Team.autobot.rawValue : Team.decepticon.rawValue, properties: transformerProperties)
+        let request = CreateTransformerModel.Create.NewTransformer(name: name, team: typeSelection.selectedSegmentIndex == 0 ? Team.autobot.rawValue : Team.decepticon.rawValue, id: editExistingID, properties: transformerProperties)
         interactor?.createTransformer(request)
     }
     
     @objc func close() {
         self.dismiss(animated: true)
     }
-    
-    
     
     //------------------------------------------------------------------------------
     // MARK: Setup
@@ -174,7 +183,7 @@ class CreateTransformerVC : UIViewController , UIGestureRecognizerDelegate{
 
 extension CreateTransformerVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        valuesTableHeight.constant = CGFloat(transformerProperties.count * 70 > 0 ? transformerProperties.count * 70 : 100)
+        //        valuesTableHeight.constant = CGFloat(transformerProperties.count * 70 > 0 ? transformerProperties.count * 70 : 100)
         return transformerProperties.count
     }
     
@@ -196,10 +205,12 @@ extension CreateTransformerVC : UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         addTap()
     }
-
+    
 }
 
-
+//------------------------------------------------------------------------------
+// MARK: Table Cell
+//------------------------------------------------------------------------------
 class SliderCell : UITableViewCell {
     
     @IBOutlet weak var title: UILabel!

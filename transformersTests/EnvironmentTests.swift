@@ -10,19 +10,12 @@ import XCTest
 @testable import transformers
 
 class EnvironmentTests: XCTestCase {
-    var Current = Environment()
-    var tokenRestore:String?
+    var Current:Environment! = nil
+    
     override func setUp() {
         super.setUp()
-        tokenRestore = User.token
         User.clearStoredUser()
-    }
-
-    override func tearDown() {
-        if tokenRestore != nil {
-            UserDefaults.standard.setValue(tokenRestore, forKey: defaults.userToken)
-            UserDefaults.standard.synchronize()
-        }
+        Current = Environment()
     }
 
     func testEnvironment() {

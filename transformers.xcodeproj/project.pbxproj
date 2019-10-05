@@ -45,10 +45,9 @@
 		84F02DCA2331D00200169395 /* BattleLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DC92331D00200169395 /* BattleLogic.swift */; };
 		84F02DCC2331D03600169395 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DCB2331D03600169395 /* User.swift */; };
 		84F02DCF2332105700169395 /* MockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DCE2332105700169395 /* MockAPI.swift */; };
-		84F02DD1233234EC00169395 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 84F02DD0233234EB00169395 /* Cartfile */; };
-		84F02DD3233235CB00169395 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 84F02DD2233235CA00169395 /* README.md */; };
 		84F02DD523323FA500169395 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F02DD423323FA500169395 /* Kingfisher.framework */; };
 		84F02DD72332661100169395 /* TransformerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DD62332661100169395 /* TransformerDB.swift */; };
+		84F02DD92334361B00169395 /* BattleLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F02DD82334361B00169395 /* BattleLogicTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +61,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		840FE9E0232BFB3C009898DC /* then.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = then.framework.dSYM; path = Carthage/Build/iOS/then.framework.dSYM; sourceTree = "<group>"; };
 		840FE9E2232BFB45009898DC /* then.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = then.framework; path = Carthage/Build/iOS/then.framework; sourceTree = "<group>"; };
 		8473730C232773FC00B6E697 /* FireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBase.swift; sourceTree = "<group>"; };
 		8473730E23289DF200B6E697 /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 		84E3DE282326A9ED005E621A /* FakeCover.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FakeCover.xib; sourceTree = "<group>"; };
 		84E3DE2A2326AAA2005E621A /* FakeCoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCoverVC.swift; sourceTree = "<group>"; };
 		84E3DE2C2326B2ED005E621A /* BattleTransformersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleTransformersVC.swift; sourceTree = "<group>"; };
-		84E3DE312326D83A005E621A /* SnapshotTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapshotTesting.framework; path = Carthage/Build/iOS/SnapshotTesting.framework; sourceTree = "<group>"; };
 		84F02DBF2330B1A300169395 /* ShowTransformersInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTransformersInteractor.swift; sourceTree = "<group>"; };
 		84F02DC12330B1DF00169395 /* ShowTransformersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTransformersPresenter.swift; sourceTree = "<group>"; };
 		84F02DC32330B21100169395 /* ShowTransformersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTransformersModel.swift; sourceTree = "<group>"; };
@@ -109,6 +106,7 @@
 		84F02DD2233235CA00169395 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		84F02DD423323FA500169395 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		84F02DD62332661100169395 /* TransformerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerDB.swift; sourceTree = "<group>"; };
+		84F02DD82334361B00169395 /* BattleLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleLogicTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,10 +179,11 @@
 		847C43632325A31E00E6BC32 /* transformersTests */ = {
 			isa = PBXGroup;
 			children = (
-				847C43662325A31E00E6BC32 /* Info.plist */,
 				8473730E23289DF200B6E697 /* EnvironmentTests.swift */,
-				84E3DE352326DE5E005E621A /* Views */,
+				84F02DD82334361B00169395 /* BattleLogicTests.swift */,
 				84F02DCE2332105700169395 /* MockAPI.swift */,
+				84E3DE352326DE5E005E621A /* Views */,
+				847C43662325A31E00E6BC32 /* Info.plist */,
 			);
 			path = transformersTests;
 			sourceTree = "<group>";
@@ -244,8 +243,6 @@
 			children = (
 				84F02DD423323FA500169395 /* Kingfisher.framework */,
 				840FE9E2232BFB45009898DC /* then.framework */,
-				840FE9E0232BFB3C009898DC /* then.framework.dSYM */,
-				84E3DE312326D83A005E621A /* SnapshotTesting.framework */,
 				84B81D412325B0D500260CCD /* Alamofire.framework */,
 				84B81D422325B0D500260CCD /* SwiftyJSON.framework */,
 			);
@@ -396,8 +393,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84F02DD3233235CB00169395 /* README.md in Resources */,
-				84F02DD1233234EC00169395 /* Cartfile in Resources */,
 				847C435A2325A31D00E6BC32 /* LaunchScreen.storyboard in Resources */,
 				847C43572325A31D00E6BC32 /* Assets.xcassets in Resources */,
 				847C43552325A31C00E6BC32 /* Main.storyboard in Resources */,
@@ -486,6 +481,7 @@
 				84F02DCF2332105700169395 /* MockAPI.swift in Sources */,
 				847373112328A76F00B6E697 /* LoginVCTests.swift in Sources */,
 				84F02DC82330BD7100169395 /* LoginInteractorTests.swift in Sources */,
+				84F02DD92334361B00169395 /* BattleLogicTests.swift in Sources */,
 				84F02DC62330B82200169395 /* LoginPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -578,7 +574,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -633,7 +629,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -707,7 +703,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bethegame..transformersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/transformers.app/transformers";
 			};
@@ -732,7 +728,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bethegame..transformersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/transformers.app/transformers";
 			};

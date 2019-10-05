@@ -1,37 +1,41 @@
 # transformers
 Tech Test from a local Company
 
-This test took me approx 14 hours to complete this over about a week+
+## UPDATE Oct 2019:
 
-It was more time than I was planning, but there was three big ask. API, App and Logic.
+1. I was happy with the code I'd created in the time given. The Battle logic and 100% tests  are where functional programming has taken me. All other views classes are also able to be 100% tested  - given time to write tests.
 
-Although the brief seemed to look for a creative 'design' element I hope that would also include creating a well crafted app, rather than implementing/creating some visual components which is not my forte. Howvere, I am used to and experienced in implementing pixel perfect designs from sketch, PS or similar and working closely with grapic designers to implement areas that also required specific animations sometimes driven by certain user actions/inputs.
+2. I didn't get an interview but I learnt a lot about myself and avoiding this kind of test process in the future - this could be gleaned in a 1/2 hour discussion! This really got me contemplating the best use of my engineering skills.
 
-I wrote the app from scratch, usually I would've pushed up to iTunes and delivered a working app but had to call it based on the time/effort I'd put in.
+--------------------------------
 
-I really wanted to demonstrate my ability to create a highly minatainable, testable code base that has clean arcitechture principles, yet built in a simple digestable manner.
+This test took me approx 18 hours to complete over a week+
 
-Class Docs:
+It was more time than I was planning...
+
+I creating a well crafted app, rather than any visual components which is not my forte. However, I am used to, and experienced in implementing pixel perfect designs from sketch, PS or similar and working closely with grapic designers to implement areas that also required specific animations sometimes driven by certain user actions/inputs.
+
+They also asked for some explanation of classes written:
+
 Environment - Current global structure of needed properties.
 User - Current User / auth token
+
 Transformer - Model data
-Transformers - Current / resident DB
-BattleLogic - Game to run the battle
+Transformers - Current & resident DB of [ID:Transformer]
+BattleLogic - Game to run the battle of each ranked team member
+
 FakeSplash / FakeCover - Provided for initial routing and flow
 Note: All ViewControllers below have ViewController/Interactor/Presenter classes for testing
 LoginVC - Get the Allspark token!   (Testing example showing in LoginTests)
 ShowTransformers - List of current Transformers
 CreateTransformer - Create or Edit Transformers
-BattleTransoformers - Unfinished due to time - but was going to display the calculated results one after another....
+BattleTransoformers - Did not have time to present any of the battle screen...but code is tested.
 ViewUtils - Just some extensions
-FireBase - Your API
-API Service - URL Request class
+
+FireBase - Transformers API
+API Service
 Utils - Handy stuff
 
 With a certain amount of dependency injection and utiliizing the latest snapshot testing tools, it's possible to have a very well tested app, including visual layouts, without having to rely on slower UITesting, which can often be distracting from the real issues.
 
-Whilst I fell short of the overall goals I do hope there is enough code in place to get a feel for my coding style and approach...just needed a little more debugging time!
-
-Thx and I look forward to hearing any feedback you have from my efforts...
-
-Jules.
+I do hope there is enough code in place to get a feel for my coding style and approach.

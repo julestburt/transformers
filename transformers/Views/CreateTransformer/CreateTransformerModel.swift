@@ -13,15 +13,8 @@ enum CreateTransformerModel {
         struct NewTransformer {
             let name:String
             let team:String
+            let id:String?
             let properties:[String:Int]
-//            var strength:Int
-//            var intelligence:Int
-//            var speed:Int
-//            var endurance:Int
-//            var rank:Int
-//            var courage:Int
-//            var firepower:Int
-//            var skill:Int
         }
     }
     enum Created {

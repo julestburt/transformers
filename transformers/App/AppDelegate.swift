@@ -26,8 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 fileprivate func debugUser() {
     #if DEBUG
     print("User token: \(User.token ?? "nil")")
-//            let token =
-//            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0cmFuc2Zvcm1lcnNJZCI6Ii1Mb1RvVEVsZENqQm5aQTJycUowIiwiaWF0IjoxNTY4MTgwMTM0fQ.G0VrPMTpd5zQMlKVr1w3cHExXHgN0GIE01I62a5VSUs"
+//            let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0cmFuc2Zvcm1lcnNJZCI6Ii1Mb1RvVEVsZENqQm5aQTJycUowIiwiaWF0IjoxNTY4MTgwMTM0fQ.G0VrPMTpd5zQMlKVr1w3cHExXHgN0GIE01I62a5VSUs"
 //            UserDefaults.standard.set(token, forKey: defaults.userToken)
     
 //            User.clearStoredUser()

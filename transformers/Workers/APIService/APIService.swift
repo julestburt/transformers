@@ -86,7 +86,6 @@ class API : NSObject {
                 if let token = response.result.value {
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
                         let result: JSON =  ["token":"\(token)"]
-                        self.saveDebugData(result.description, fileName: url.absoluteString)
                         self.didReceive(ID: ID, result: result)                    }
                 }
             case .failure(_):
@@ -108,7 +107,6 @@ class API : NSObject {
                     print(json)
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
                         let result = JSON(json)
-                        self.saveDebugData(result.description, fileName: ID)
                         self.didReceive(ID: ID, result: result)
                     }
                 }
@@ -239,23 +237,6 @@ class API : NSObject {
             self.request = request
             self.completion = completion
         }
-    }
-    
-    //------------------------------------------------------------------------------
-    // MARK: API Response Store
-    //------------------------------------------------------------------------------
-    private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-    func saveDebugData(_ sourceString:String, fileName:String) {
-        #if DEBUG
-        let fileNamePath = documentsPath.appendingPathComponent(fileName+".txt")
-        do {
-            
-            try sourceString.write(toFile: fileNamePath, atomically: true, encoding: String.Encoding.utf8)
-        } catch let error as NSError {
-            print("error saving file \(fileNamePath)")
-            print(error.localizedDescription)
-        }
-        #endif
     }
 }
 

@@ -12,6 +12,12 @@ import then
 @testable import transformers
 
 class MockAPI : APIProtocol {
+    func changeTransformer(_ ID: String, name: String, team: String, properties: [String : Int]) -> Promise<Transformer> {
+        return Promise { success, fail in
+            fail(CustomError(title: "not implelemted", description: "this needs implementing", code: -95))
+        }
+    }
+    
     
     var allSparkFail = false
     var transformers:[Transformer]?
@@ -39,15 +45,9 @@ class MockAPI : APIProtocol {
     func createTransformer(_ name: String, team: String, properties: [String : Int]) -> Promise<Transformer> {
         return Promise { success, fail in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                
-                var  defaultTransformer:Transformer { let uuid = UUID.init().uuidString
-                    let prefix = uuid.prefix(5)
-                    let randomTeam = Float.random(in: 0..<1) == 0 ? Team.autobot : Team.decepticon
-                    return Transformer.makeTransformer(name: "name-\(prefix)", id: uuid, team: randomTeam)
-                }
-                
-                let createdTransformer = self.createTransformer ?? defaultTransformer
-                
+                guard let team = Team(rawValue: team) else { fail(CustomError(title: "Failed to create Transformer", description: "Team creation failed", code: -96))
+                    return }
+                let createdTransformer = Transformer(name: name, team: team)
                 success(createdTransformer)
             }
         }

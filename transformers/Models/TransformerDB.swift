@@ -9,6 +9,9 @@
 import Foundation
 import SwiftyJSON
 
+//------------------------------------------------------------------------------
+// MARK: The resident current list of Transformers
+//------------------------------------------------------------------------------
 class Transformers {
     //    static var current = Transformers()
     static let current:Transformers = {
@@ -18,25 +21,25 @@ class Transformers {
         return transformers
     }()
     
-    
-    let notificationTransformerRefresh = "notificationTransformerRefresh"
-    
     private init() {
         self._transformers = [:]
         // restore any saved Transformers
     }
     
-    var delegate:(([Transformer])->Void)? = nil
+    var sendToDelegate:(([Transformer])->Void)? = nil
     func subscribeToUpdates(_ reportTo:@escaping([Transformer])->Void) {
-        delegate = reportTo
+        sendToDelegate = reportTo
     }
     
     func refreshFromServer() {
         Current.apiService?.getTransformers()
             .then { tranformerList in
-                self.storeTransformers(tranformerList)
-                let array = self.DB.map { $1 }
-                self.delegate?(array)
+                self.setTransformerDB(tranformerList)
+                self.sendToDelegate?(self.DB.map { $1 })
+        }.onError { error in
+            if let error = error as? CustomError {
+                print(print("refreshTransformers failed:\(error.title ?? "no-title")"))
+            }
         }
     }
     
@@ -59,47 +62,52 @@ class Transformers {
         return DB.filter { $0.key == ID }.first?.value
     }
     
-    
-    
-    
-    func storeTransformers(_ toStore:[Transformer]) {
+    func addCreatedTransformer(_ transformer:Transformer) {
+        safeSerialQueueTransformer.async(flags:.barrier) {
+            self._transformers[transformer.id] = transformer
+            self.storeToUserDefaults(self._transformers)
+        }
+        self.sendToDelegate?(self.DB.map { $1 })
+    }
+
+    func setTransformerDB(_ toStore:[Transformer]) {
         safeSerialQueueTransformer.async(flags:.barrier) {
             self._transformers = [:]
             for transformer in toStore {
                 self._transformers[transformer.id] = transformer
             }
-            self.storeTransformers()
+            self.storeToUserDefaults(self._transformers)
         }
+        self.sendToDelegate?(self.DB.map { $1 })
     }
     
-    func addCreatedTransformer(_ transformer:Transformer) {
+    func removeTransformer(_ idToRemove:String) {
+        guard let transformer = self.transformerForID(idToRemove) else { return }
         safeSerialQueueTransformer.async(flags:.barrier) {
-            self._transformers[transformer.id] = transformer
-            self.storeTransformers()
+            self._transformers.removeValue(forKey: transformer.id)
+            self.storeToUserDefaults(self._transformers)
         }
+        self.sendToDelegate?(self.DB.map { $1 })
+    }
+
+    private func restoreTransformers() {
+        guard let transformers = self.restoreFromUserDefaults() else { return }
+        setTransformerDB(transformers)
     }
     
     //------------------------------------------------------------------------------
     // MARK: Store / Restore localDB to UserDefaults
     //------------------------------------------------------------------------------
+    fileprivate func storeToUserDefaults(_ transformers:[String:Transformer]) {
+        let jsonString = "[\(transformers.compactMap { $0.value.createJSON }.joined(separator: ","))]"
+        UserDefaults.standard.set(jsonString, forKey: UserDefaults.keys.transformerStore)
+    }
     
-    func restoreTransformers() {
+    fileprivate func restoreFromUserDefaults() -> [Transformer]? {
         guard let storedTransformerJSON = UserDefaults.standard.object(forKey: UserDefaults.keys.transformerStore) as? String,
-            let jsonData = storedTransformerJSON.data(using: .utf8),
-            let json = try? JSON(data: jsonData),
-            let jsonArrayTransformers = json["transformers"].array else { return }
-        let transformers = jsonArrayTransformers.compactMap {
-            Transformer($0.description)
-        }
-        storeTransformers(transformers)
+            let jsonStringData = storedTransformerJSON.data(using: .utf8),
+            let transformers = try? JSONDecoder().decode([Transformer].self, from: jsonStringData)
+           else { return nil }
+        return transformers
     }
-    
-    
-    func storeTransformers() {
-        let jsonArrayTransformers = self._transformers.map { $0.value.createJSON }.compactMap { $0 }
-        let result:JSON =  ["transformers":"[\(jsonArrayTransformers.joined(separator: ","))]"]
-        UserDefaults.standard.set(result.description, forKey: UserDefaults.keys.transformerStore)
-    }
-    
 }
-

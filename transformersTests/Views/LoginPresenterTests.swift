@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import SnapshotTesting
+//import SnapshotTesting
 
 @testable import transformers
 

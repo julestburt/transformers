@@ -9,6 +9,9 @@
 import UIKit
 import SwiftyJSON
 
+//------------------------------------------------------------------------------
+// MARK: Tranformer Item
+//------------------------------------------------------------------------------
 let TransformerProperties =
     ["strength","intelligence","speed","endurance","rank","courage","firepower","skill"]
 
@@ -36,8 +39,7 @@ struct Transformer: Encodable, Decodable {
     
     var createJSON:String? {
         do {
-            let jsonEncoder = JSONEncoder()
-            let jsonData = try jsonEncoder.encode(self)
+            let jsonData = try JSONEncoder().encode(self)
             let jsonString = String(data: jsonData, encoding: .utf8)
             return jsonString
         } catch {
@@ -45,43 +47,24 @@ struct Transformer: Encodable, Decodable {
         }
     }
     
+}
+
+extension Transformer {
     init?(_ jsonString:String) {
         print(jsonString)
         guard let jsonData = jsonString.data(using: .utf8),
-        let transformer = Transformer.init(jsonData) else { return nil }
+            let transformer = Transformer.init(jsonData) else { return nil }
         self = transformer
     }
-        
+    
     init?(_ jsonData:Data) {
         do {
             let jsonDecoder = JSONDecoder()
             let transformer = try jsonDecoder.decode(Transformer.self, from: jsonData)
             self = transformer
-            print("Created \(transformer.name)")
         } catch {
-            print("unable to create transformer from jsonData:\n")
+            print("unable to create transformer from jsonData:\n\(jsonData.description)")
             return nil
         }
-    }
-    
-    static func makeTransformer(name:String, id:String? = nil, team:Team) -> Transformer {
-        let id:String = id ?? UUID.init().uuidString
-        let jsonTransformer = """
-        {
-        "id": "\(id)", "name": "\(name)", "strength": 10,
-        "intelligence": 10,
-        "speed": 4,
-        "endurance": 8,
-        "rank": 10,
-        "courage": 9,
-        "firepower": 10,
-        "skill": 9,
-        "team": "\(team.rawValue)",
-        "team_icon":
-        "https://tfwiki.net/mediawiki/images2/archive/8/8d/20110410191659%21Symbol_decept_reg.png"
-        }
-        """
-        return Transformer(jsonTransformer)!
-    }
+    }    
 }
-

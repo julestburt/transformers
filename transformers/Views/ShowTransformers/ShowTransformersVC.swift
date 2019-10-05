@@ -21,21 +21,12 @@ extension ShowTransformersVC : ShowTransformersDisplay {
         transformers = transformerList
         //spinner off here
         DispatchQueue.main.async {
-            guard let count = self.transformers?.count, count > 0 else {
-                self.navigationItem.rightBarButtonItem?.isEnabled = false
-                return }
-            if count >= 2 {
-                self.navigationItem.rightBarButtonItem?.isEnabled = false
-            }
             self.table.reloadData()
         }
     }
     
-    func createTransformer() {
+    @objc func createTransformer() {
         present(UIViewController.named("CreateTransformer"), animated: true) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
-                self.interactor?.getTransformers()
-            })
         }
     }
 }
@@ -46,7 +37,8 @@ extension ShowTransformersVC : ShowTransformersDisplay {
 class ShowTransformersVC : UIViewController {
     @IBOutlet weak var table: UITableView!
     var transformers:[ShowTransformer.Display.Transformer]? = nil
-    
+    var presentlySelected = false
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         interactor?.getTransformers()
@@ -61,6 +53,7 @@ class ShowTransformersVC : UIViewController {
         navigationItem.title = "Transformers"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Battle", style: UIBarButtonItem.Style.plain, target: self, action: #selector(startBattle))
         navigationItem.rightBarButtonItem?.isEnabled = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New", style: UIBarButtonItem.Style.plain, target: self, action: #selector(createTransformer))
     }
     
     
@@ -110,6 +103,7 @@ extension ShowTransformersVC : UITableViewDelegate, UITableViewDataSource {
             let cell = table.dequeueReusableCell(withIdentifier: "TransformerCell") as? TransformerCell
             else { let emptyCell =  table.dequeueReusableCell(withIdentifier: "EmptyCell" )
                 as! EmptyCell
+                emptyCell.createButton.isHidden = transformers != nil   
                 emptyCell.creating = false
                 emptyCell.delegate = {
                     self.createTransformer()
@@ -127,15 +121,34 @@ extension ShowTransformersVC : UITableViewDelegate, UITableViewDataSource {
             if let id = self.transformers?[indexPath.row].ID {
                 Current.apiService?.delete(id)
                     .then { confirm in
+                        Transformers.current.removeTransformer(id)
                         DispatchQueue.main.async {
                             self.transformers?.remove(at: indexPath.row)
                             tableView.deleteRows(at: [indexPath], with: .left)
                         }
+                }.onError { error in
+                    let error = error as? CustomError
+                    print(error?.title ?? "")
+                    print(error?.errorDescription)
                 }
                 
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard !presentlySelected, let count = transformers?.count, indexPath.row < count,
+        let transformer = transformers?[indexPath.row]
+        else { return }
+        Current.editTransformer = transformer.ID
+        show(editTransformer, sender: nil)
+    }
+    
+    var editTransformer:UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: "CreateTransformer")
+    }
+
 }
 
 //------------------------------------------------------------------------------

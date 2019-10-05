@@ -39,8 +39,6 @@ class FireBase : APIProtocol {
     
     func getAllSpark() -> Promise<String> {
         return Promise { success, fail in
-            // If have a token just return it!
-            if let token = User.token { success(token) ; return }
             let endpoint = Endpoints.allSpark
             API.service.request(url: endpoint.url, type:endpoint.type) { response in
                 switch response {
@@ -64,7 +62,6 @@ class FireBase : APIProtocol {
             API.service.request(url: endpoint.url, type: endpoint.type) { response in
                 switch response {
                 case .Success(let json):
-                    let jsonArray = json["transformers"].array
                     let transformers = json["transformers"].arrayValue.compactMap { Transformer($0.description) }
                     success(transformers)
                 case .Error(let error):
@@ -86,14 +83,15 @@ class FireBase : APIProtocol {
             API.service.request(url: endpoint.url, type: endpoint.type, params: params) { response in
                 switch response {
                 case .Success(let json):
-                    print(json.string ?? "---")
-                    if let transformer = Transformer(json.stringValue) {
+                    
+                    if let jsonData = json.description.data(using: .utf8),
+                        let transformer = Transformer.init(jsonData) {
                         Transformers.current.addCreatedTransformer(transformer)
                         success(transformer)
+                    } else {
+                        fail(CustomError(title: "Failed to createTransformer", description: "couldn't extract from response data?", code: -97))
+                        Transformers.current.refreshFromServer()
                     }
-                    // Fall through case
-                    Transformers.current.refreshFromServer()
-                    fail(CustomError(title: "Failed to createTransformer", description: "couldn't extract from response data?", code: -97))
                 case .Error(let error):
                     print(error.message)
                 }
@@ -163,30 +161,3 @@ struct CustomError: OurErrorProtocol {
         self.code = code
     }
 }
-
-
-/*
- GET https://transformers-api.firebaseapp.com/allspark
- “Authorization” “Bearer <token>”\
- “Content-Type” “application/json”
- POST ​https://transformers-api.firebaseapp.com/transformers
- {
- "name": "Megatron", "strength": 10, "intelligence": 10, "speed": 4, "endurance": 8, "rank": 10, "courage": 9, "firepower": 10, "skill": 9,
- "team": "D"
- }
- 
- GET ​https://transformers-api.firebaseapp.com/transformers
- {
- "transformers": [
- {...
- 
- PUT ​https://transformers-api.firebaseapp.com/transformers
- {
- "id": "-LLbrUN3dQkeejt9vTZc",
- "name": "Megatron123",
- ...
- 
- DELETE ​https://transformers-api.firebaseapp.com/transformers/{transformerId}
- ...
- 
- */
